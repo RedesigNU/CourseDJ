@@ -305,6 +305,49 @@ var test4 = {
    */
   $(document).ready(function() {
 
+    $('#customEventOK').click(function(e) {
+      var courseData = {
+        type: 'custom',
+        meeting_days: '',
+        start_time: $('#startHour').val() + ':' + $('#startMinnute').val() + ':00',
+        end_time: $('#endHour').val() + ':' + $('#endMinnute').val() + ':00',
+        shortText: $('#name').val()
+      };
+
+      if ($('#mon').is(':checked'))
+        courseData.meeting_days += 'Mo';
+      if ($('#tue').is(':checked'))
+        courseData.meeting_days += 'Tu';
+      if ($('#wed').is(':checked'))
+        courseData.meeting_days += 'We';
+      if ($('#thu').is(':checked'))
+        courseData.meeting_days += 'Th';
+      if ($('#fri').is(':checked'))
+        courseData.meeting_days += 'Fr';
+      if ($('#sat').is(':checked'))
+        courseData.meeting_days += 'Sa';
+      if ($('#sun').is(':checked'))
+        courseData.meeting_days += 'Su';
+
+      $('#added-classes').append(
+        $('<div/>', { 'class':"added-class row panel panel-default" }).append(
+          $('<a/>', { 'data-toggle':"collapse"}).append(  // Trigger for holding labs array info
+            $('<div/>', { 'class':"col-lg-1 col-md-1 col-sm-1 col-xs-1" }).append(
+              $('<span/>', { 'class':"glyphicon glyphicon-remove" })).click(removeCourse),
+            $('<div/>', { 'class':"col-lg-8 col-md-8 col-sm-8 col-xs-8",
+                          'text' : $('#name').val() }),
+            $('<div/>', { 'class':"col-lg-12 col-md-12 col-sm-12 col-xs-12" }).append(
+              $('<div/>', { 'class':"btn-group prefs", 'data-toggle':"buttons" }).append(
+                $('<label/>', { 'class':"btn btn-default pref active", 'text':"Mandatory" }).append(
+                  $('<input/>', { 'type':"radio", 'name':"options", 'id':"option1", 'checked':"checked"})),
+                $('<label/>', { 'class':"btn btn-default pref", 'text':"Preferred" }).append(
+                  $('<input/>', { 'type':"radio", 'name':"options", 'id':"option2" })),
+                $('<label/>', { 'class':"btn btn-default pref", 'text':"Optional" }).append(
+                  $('<input/>', { 'type':"radio", 'name':"options", 'id':"option3" }))))),
+            $('<div/>', { 'class':"panel-collapse collapse out col-xs-12 col-lg-12 col-md-12 col-sm-12" })
+        ).data('courseData', $(this).data('courseData')));
+    });
+
     $('#add-event').click(function(e) {
       $('#customEventModal').modal();
     });
@@ -367,7 +410,7 @@ var test4 = {
             
             // Add it to the website!
             $('#results').empty();
-            $('#results').append('<li class="listButton" id="add-event" onClick="$(\'#customEventModal\').modal()">Add a custom event</li>');
+            $('#results').append('<li class="listButton" id="add-event" onClick="$(\'#customEventModal\').modal();">Add a custom event</li>');
             $.each(searchResults, function(index, element) {
               generateList(index, element);
             });
