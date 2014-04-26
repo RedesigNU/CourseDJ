@@ -168,14 +168,6 @@
       clearTimeout(timer);
     });
 
-    function generateList(idIn, elementIn) {
-      jQuery('<li/>', {
-        id: idIn,
-        class: "listButton",
-        text: "[" + elementIn.subject + " " + elementIn.catalog_num + "] " + elementIn.title
-      }).appendTo('#results');
-    }
-
     // The search function itself
     function search() {
 
@@ -233,6 +225,22 @@
         }
       }
     }
-  });
 
+    // Populate drop down menu w/ search results
+    function generateList(idIn, elementIn) {
+      jQuery('<li/>', {
+        id: idIn,
+        class: "listButton",
+        text: "[" + elementIn.subject + " " + elementIn.catalog_num + "] " + elementIn.title
+      }).click(addCourse).data("courseData", elementIn).appendTo('#results');
+    }
+
+    var calendar
+
+    // Add course to calendar and store it
+    function addCourse(e) {
+      console.log($(this).data("courseData"));
+    }
+
+  });
 }).call(this, window, window.document, window.jQuery);
