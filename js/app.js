@@ -70,7 +70,7 @@ var test4 = {
           startTime: currentDay + ' ' + p_class.start_time.substr(0, 5),
           endTime: currentDay + ' ' + p_class.end_time.substr(0, 5),
           shortText: p_class.subject + ': ' + p_class.catalog_num,
-          longText: 'hello',
+          longText: lt,
           priority: pri,
           conflicted: false
         };
@@ -438,10 +438,10 @@ var test4 = {
         if (isMandatory) pri = 1.0;
         if (isPreferred) pri = 0.5;
         if (isOptional) pri = 0.0;
-        allTimeslots.push(Timeslot.fromClass(courseData, pri == 1.0 ? 1.0 : (pri + Math.random() * 0.2 ).clamp(0, 0.98)),
+        allTimeslots.push(Timeslot.fromClass(courseData, pri == 1.0 ? 1.0 : (pri + Math.random() * 0.2 ).clamp(0, 0.98),
           'Professor: ' + courseData.instructor.name + '\n' +
           'Meeting time: ' + courseData.startTime + '-' + courseData.endTime + '\n' +
-          'Classroom: ' + courseData.room);
+          'Classroom: ' + courseData.room));
       });
       numberOfClasses = $('select').val();
       console.log(allTimeslots.length);
