@@ -378,12 +378,16 @@ var test4 = {
       }).click(addCourse).data("courseData", elementIn).appendTo('#results');
     }
 
+    function removeCourse(e) {
+      $(this).parent().remove();
+    }
+
     // Add course dropdown list on the left sidebar
     function addCourse(e) {
       $('#added-classes').append(
         $('<div/>', { 'class':"added-class row" }).append(
           $('<div/>', { 'class':"col-lg-1 col-md-1 col-sm-1 col-xs-1" }).append(
-            $('<span/>', { 'class':"glyphicon glyphicon-remove" })),
+            $('<span/>', { 'class':"glyphicon glyphicon-remove" })).click(removeCourse),
           $('<div/>', { 'class':"col-lg-8 col-md-8 col-sm-8 col-xs-8",
                         'text' :$(this).data("courseData").subject + " " +  $(this).data("courseData").catalog_num }),
           $('<div/>', { 'class':"col-lg-12 col-md-12 col-sm-12 col-xs-12" }).append(
