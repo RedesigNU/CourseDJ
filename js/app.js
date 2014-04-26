@@ -398,9 +398,6 @@ var test4 = {
 
     // Populate drop down menu w/ search results
     function generateList(idIn, elementIn) {
-<<<<<<< HEAD
-      jQuery('<li/>', {
-=======
       var skip = false;
       $('.added-class').each(function(index) {
         var courseData = $(this).data('courseData');
@@ -412,7 +409,6 @@ var test4 = {
       if (skip)
         return;
       $('<li/>', {
->>>>>>> origin/master
         id: idIn,
         class: "listButton",
         text: "[" + elementIn.subject + " " + elementIn.catalog_num + "-" + elementIn.section + "] " + elementIn.title
