@@ -12,107 +12,54 @@
         <script src="calendar_codebase/dhtmlxscheduler.js" type="text/javascript"></script>
         <link rel="stylesheet" href="calendar_codebase/dhtmlxscheduler.css" type="text/css">
         
-        <!-- custom styling/javascript -->
+        
+        <!-- fonts -->
+        <link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+        
+        <!-- custom styling -->
         <link rel="stylesheet" href="css/home.css" type="text/css">
         
         
     </head>
-    <body>
+    <body> 
+        <div id="welcome">
+            <div><p>Schedulify</p>
+            <div id="subheading">Scheduling, simplified.</div>
+            <label class="btn btn-default" id="start">Get Started!</label>
+            </div>
+        </div>
+        <div id="info">
+            <div id="header">
+            <span id="title">Schedulify</span>
+            </div>
+            <div id="about-div">
+                <p id=aboutpara>Who are we?</p>
+                <p id=abouttext>textextextexetextextxtxet</p>
+                <a href="#" id="back"><span class="glyphicon glyphicon-arrow-left"></span> Return</a>
+            </div>
+        </div>
+        <span id="main">
+        <div id="header">
+            <span id="title">Schedulify</span>
+        </div>
         <div class="row" id="everything">
-            <div class="col-sm-4 col-md-4 col-lg-3" id="left-box"> <!-- left box -->
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-3" id="left-box"> <!-- left box -->
                 <div class="panel panel-default" id="preferences">
-                    <div class="panel-heading">Preferences</div>
+                    <div id="pref-title">Preferences</div>
                     <div class="panel-body">
-                        <div class="input-group" id="search">
-                            <input type="text" class="form-control" placeholder="Add a class or event">
+                        <div class="dropdown">
+                            <div class="input-group" id="search" data-toggle="dropdown">
+                                <input type="text" class="form-control" placeholder="Add a class or event" id="classSearchBar">
+                            </div>
+                            <ul class="dropdown-menu" role="menu" id="results">
+                            </ul>
                         </div>
                         <div id="added-classes"> <!-- added classes -->
-                            <div class="added-class row">
-                                <div class="col-lg-1 col-md-1 col-sm-1">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-8">
-                                    BIOL_SCI 216
-                                </div>
-                                <div class="col-lg-8 col-md-8">
-                                    <div class="btn-group prefs" data-toggle="buttons">
-                                        <label class="btn btn-default pref">
-                                            <input type="radio" name="options" id="option1">Mandatory
-                                        </label>
-                                        <label class="btn btn-default pref">
-                                            <input type="radio" name="options" id="option2">Preferred
-                                        </label>
-                                        <label class="btn btn-default pref">
-                                            <input type="radio" name="options" id="option3">Optional
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="added-class row">
-                                <div class="col-md-1 col-sm-1">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                </div>
-                                <div class="col-md-3 col-sm-8">
-                                    EECS 211
-                                </div>
-                                <div class="col-lg-8 col-md-8">
-                                    <div class="btn-group prefs" data-toggle="buttons">
-                                        <label class="btn btn-default pref">
-                                            <input type="radio" name="options" id="option1">Mandatory
-                                        </label>
-                                        <label class="btn btn-default pref">
-                                            <input type="radio" name="options" id="option2">Preferred
-                                        </label>
-                                        <label class="btn btn-default pref">
-                                            <input type="radio" name="options" id="option3">Optional
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="added-class row">
-                                <div class="col-md-1 col-sm-1">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                </div>
-                                <div class="col-md-3 col-sm-8">
-                                    BMD_ENG 270
-                                </div>
-                                <div class="col-lg-8 col-md-8">
-                                    <div class="btn-group prefs" data-toggle="buttons">
-                                        <label class="btn btn-default pref">
-                                            <input type="radio" name="options" id="option1">Mandatory
-                                        </label>
-                                        <label class="btn btn-default pref">
-                                            <input type="radio" name="options" id="option2">Preferred
-                                        </label>
-                                        <label class="btn btn-default pref">
-                                            <input type="radio" name="options" id="option3">Optional
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="added-class row">
-                                <div class="col-md-1 col-sm-1">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                </div>
-                                <div class="col-md-3 col-sm-8">
-                                    MECH_ENG 433
-                                </div>
-                                <div class="col-lg-8 col-md-8">
-                                    <div class="btn-group prefs" data-toggle="buttons">
-                                        <label class="btn btn-default pref">
-                                            <input type="radio" name="options" id="option1">Mandatory
-                                        </label>
-                                        <label class="btn btn-default pref">
-                                            <input type="radio" name="options" id="option2">Preferred
-                                        </label>
-                                        <label class="btn btn-default pref">
-                                            <input type="radio" name="options" id="option3">Optional
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
+                        </div> <!-- added classes -->
+                        <div id="numOfClasses">
                             <div class="row" id="class-count">
-                                <div class="col-sm-8">Number of classes:</div>
+                                <div class="col-sm-8 subheading">Number of classes:</div>
                                 <div class="col-sm-4">
                                     <select class="form-control">
                                         <option>3</option>
@@ -122,10 +69,9 @@
                                     </select>
                                 </div>
                             </div>
-                        </div> <!-- added classes -->
+                        </div>
                         <div id="attributes"> <!-- other attributes -->
-                            <p>Other Attributes</p>
-                            <div class="added-class">
+                            <div class="subheading">
                                 Time in the Day:
                                 <div class="btn-group prefs" data-toggle="buttons">
                                     <label class="btn btn-default pref">
@@ -139,28 +85,31 @@
                                     </label>
                                 </div>
                             </div>
-                            <div class="added-class">
+                            <div class="subheading">
                                 Class distribution:
                                 <div class="btn-group prefs" data-toggle="buttons">
                                     <label class="btn btn-default pref">
-                                        <input type="radio" name="options" id="option1">Earlier
+                                        <input type="radio" name="options" id="option1">Blocked
                                     </label>
                                     <label class="btn btn-default pref">
                                         <input type="radio" name="options" id="option2">Don't Care
                                     </label>
                                     <label class="btn btn-default pref">
-                                        <input type="radio" name="options" id="option3">Later
+                                        <input type="radio" name="options" id="option3">Spread Out
                                     </label>
                                 </div>
                             </div>
-                        </div> <!-- other attributes -->
+                        </div> <!-- other attributes --> 
                         <div id="submit">
                             <button type="button" class="btn btn-default btn-lg">Submit</button>
                         </div>
                     </div>
                 </div>
+                <div id="abt">
+                    <a href="#" id="about">About Us</a>
+                </div>
             </div> <!-- left box -->
-            <div class="col-sm-8 col-md-8 col-lg-9 panel panel-default" id="right-box">
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-9 panel panel-default" id="right-box">
                 <div id="scheduler_here" class="dhx_cal_container">
                     <div class="dhx_cal_navline">
                         <div class="dhx_cal_date"></div>
@@ -175,7 +124,7 @@
                 </div>
             </div>
         </div>
-        
+        </span>
         
         
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -184,5 +133,6 @@
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
         <script src="js/home.js" type="text/javascript"></script>
         <script src="js/app.js"></script>
+        <script src="js/styling.js"></script>
     </body>
 </html>

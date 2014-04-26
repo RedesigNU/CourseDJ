@@ -2,23 +2,112 @@ html, body{
     height:100%;
     margin:0px;
     padding:0px;
+    overflow:hidden;
+    font-family:"Droid Sans";
+}
+
+body{
+    background-image:url("../img/sunset1.jpg");
+}
+
+#title{
+    font-size:50px;   
+}
+
+#welcome{
+    height:100%;
+    width:100%;
+    position:absolute;
+    background-image:url("../img/sunset1.jpg");
+    z-index:6;
+    display:inline;
+    padding-top:20em;
+    padding-right:45em;
+}
+
+#welcome>div{
+    text-align:center;   
+}
+
+#main{
+    display:inline;
+}
+
+#welcome p{
+    color:white;
+    font-size:10em;
+    background-image:none;
+}
+
+#subheading{
+    color:white;
+    font-size:2em;
+}
+
+#start{
+    width:10em;
+    margin-top:1em;
+}
+
+#header{
+    text-align:left;
+    padding-left:20px;
+    color:#ffffff;
 }
 
 #everything{
-    height:100%;
-    margin:0px;
+    height:86%;
+    margin:0px 10px 0px 10px;
     padding:10px;
+}
+
+#aboutpara{
+    font-size:30px;
+    color:white;
+}
+
+#abouttext{
+    font-size:17px;
+    color:white;
+}
+
+#about-div{
+    padding:20em 45em 0em 0em;
+    height:100%;
+    text-align:center;
+}
+
+#info{
+    z-index:5;
+    position:absolute;
+    display:none;
+    background-image:url("../img/sunset1.jpg");
+    height:100%;
+    width:100%;
 }
 
 #left-box{
     padding:0px 10px 0px 0px;
     height:100%;
     margin:0px;
+    overflow:visible;
+}
+
+.subheading{
+    font-size:18px;
 }
 
 #preferences{
     height:100%; 
     margin:0px;
+    padding:10px;
+}
+
+#pref-title{
+    margin:5px 0px 0px 15px;
+    font-size:32px;
+    font-weight:300;
+    font-family:"Roboto";
 }
 
 #right-box{
@@ -32,12 +121,16 @@ html, body{
     padding:10px;
 }
 
+.dhx_cal_date{
+    display:none;
+}
+
 #results-nav{
     margin-top:20px;
-    text-align:center;
+    text-align:left;
 }   
 
-#search{
+#search, #results{
     width:100%;   
 }
 
@@ -46,21 +139,32 @@ html, body{
 }
 
 .added-class{
-    margin-top:5px;   
+    padding:5px;
+    margin:3px 0px 3px 0px;
+}
+
+.added-class>a{
+    color:black;   
 }
 
 .prefs{
     display:table;  
     width:100%;
+    height:2em;
 }
 
 .pref{
     display:table-cell; 
     width:33.33333%;
+    height:3em;
+    font-size:0.6em;
+    font-family:"Droid Sans";
+    padding-left:0px;
+    padding-right:0px;
 }
 
 #attributes{
-    margin-top:15px;   
+    margin-top:0.6em;   
 }
 
 #class-count{
@@ -70,4 +174,33 @@ html, body{
 #submit{
     margin-top:30px;
     text-align:center;
+}
+
+a:visited{
+    color:white;
+}
+
+.listButton {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-top: 1px solid lightgray;
+    cursor: pointer;
+    cursor: hand;
+}
+
+.listButton:hover {
+    background-color: darkgray;
+}
+
+.form-control:focus{
+    border-color:#4F165E;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(79,22,94,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(79,22,94,.6);
+}
+
+.glyphicon-remove {
+    cursor: pointer;
+    cursor: hand;
 }
