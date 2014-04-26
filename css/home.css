@@ -11,3 +11,11 @@ html, body, #everything, #left-box{
 #calendar{
     margin:0;
 }
+
+._7 > td.tue{
+    background-color:red;   
+}
+
+._83 > td.fri{
+    background-color:green;   
+}
