@@ -3,6 +3,7 @@ html, body{
     margin:0px;
     padding:0px;
     overflow:hidden;
+    font-family:"Droid Sans";
 }
 
 body{
@@ -15,13 +16,13 @@ body{
 
 #header{
     text-align:left;
-    padding-left:10px;
+    padding-left:20px;
     color:#ffffff;
 }
 
 #everything{
     height:90%;
-    margin:0px;
+    margin:0px 10px 0px 10px;
     padding:10px;
 }
 
@@ -31,9 +32,21 @@ body{
     margin:0px;
 }
 
+.subheading{
+    font-size:18px;
+}
+
 #preferences{
     height:100%; 
     margin:0px;
+    padding:10px;
+}
+
+#pref-title{
+    margin:5px 0px 0px 15px;
+    font-size:32px;
+    font-weight:300;
+    font-family:"Roboto";
 }
 
 #right-box{
@@ -76,6 +89,8 @@ body{
 .pref{
     display:table-cell; 
     width:33.33333%;
+    font-size:13px;
+    font-family:"Droid Sans";
 }
 
 #attributes{
