@@ -152,6 +152,7 @@ body{
 .added-class{
     padding:5px;
     margin:3px 0px 3px 0px;
+    border:1px solid #490062;
 }
 
 .added-class>a{
@@ -206,9 +207,9 @@ a:visited, .white{
 }
 
 .form-control:focus{
-    border-color:#4F165E;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(79,22,94,.6);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(79,22,94,.6);
+    border-color:#490062;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(49,00,62,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(49,00,62,.6);
 }
 
 .glyphicon-remove {
@@ -219,4 +220,8 @@ a:visited, .white{
 .sidebar {
     overflow-y: auto;
     height: 90%;
+}
+
+#classSearchBar{
+    border:1px solid #E6C0F2;
 }
