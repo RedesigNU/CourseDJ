@@ -236,6 +236,7 @@ var test4 = {
       newData.start_date = timeslot.startTime;
       newData.end_date = timeslot.endTime;
       newData.color = timeslot.conflicted ? 'red' : 'blue';
+      newData.longText = timeslot.longText;
       scheduleData.push(newData);
     });
     scheduler.parse(scheduleData, "json");
@@ -439,8 +440,8 @@ var test4 = {
         if (isPreferred) pri = 0.5;
         if (isOptional) pri = 0.0;
         allTimeslots.push(Timeslot.fromClass(courseData, pri == 1.0 ? 1.0 : (pri + Math.random() * 0.2 ).clamp(0, 0.98),
-          'Professor: ' + courseData.instructor.name + '\n' +
-          'Meeting time: ' + courseData.startTime + '-' + courseData.endTime + '\n' +
+          'Professor: ' + courseData.instructor.name + '<br>' +
+          'Meeting time: ' + courseData.start_time + '-' + courseData.end_time + '<br>' +
           'Classroom: ' + courseData.room));
       });
       numberOfClasses = $('select').val();

@@ -12,8 +12,10 @@ $(document).ready(function(){
 
     scheduler.attachEvent("onClick", function(id, e){
         console.log(id);
+        console.log(scheduler.getEvent(id));
+        $('#myModal .modal-body').html(scheduler.getEvent(id).longText);
+        $('#myModal').modal();
         return false;
-
     });
     scheduler.config.drag_create = false;
     scheduler.attachEvent("onBeforeEventCreated", function(id, mode, e){
