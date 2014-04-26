@@ -167,9 +167,9 @@ var test4 = {
 
     function conflict(ts1, ts2) {
       return (ts1.startTime <= ts2.endTime && ts1.startTime >= ts2.startTime ||
-        ts2.startTime <= ts1.endTime && ts2.startTime >= ts1.startTime ||
-        ts1.startTime <= ts2.startTime && ts1.endTime >= ts2.endTime ||
-        ts2.startTime <= ts1.startTime && ts2.endTime >= ts1.endTime);
+          ts2.startTime <= ts1.endTime && ts2.startTime >= ts1.startTime ||
+          ts1.startTime <= ts2.startTime && ts1.endTime >= ts2.endTime ||
+          ts2.startTime <= ts1.startTime && ts2.endTime >= ts1.endTime);
     }
 
     //add all mandatory timeslots
@@ -213,30 +213,22 @@ var test4 = {
 
     console.log('alltimeslots: ' + allTimeslots.length);
 
-    console.log(allTimeslots);
-
     var ii = 0;
     while(numClasses < numberOfClasses && ii < allTimeslots.length) {
+      console.log(ii);
       var testCases = allTimeslots[ii];
       var anyConflict = false;
-      console.log('timeslots length: ' + timeslots.length);
-      console.log('testcases length' + testCases.length);
       for (var jj = 0; jj < timeslots.length; jj++) {
-        for (var kk = 0; kk < testCases.length; kk++) {
-           if (conflict(timeslots[jj], testCases[kk])) {
-            anyConflict = true;
-          } 
+        if (conflict(timeslots[jj], testCases[ii])) {
+          anyConflict = true;
         }
       }
 
       if (!anyConflict) {
-        // console.log('timeslots');
-        // console.log(timeslots);
-        // console.log('testcases');
-        // console.log(testCases);
         timeslots = timeslots.concat(testCases);
         numClasses++;
       }
+
       ii++;
     }
 
@@ -394,12 +386,11 @@ var test4 = {
         // Hold search results in a temporary array of the top 'resultLimit' # of JSON objects
         var searchResults = [];
         var resultLimit = 7;
-        var term = 4530;
 
         // CASE 1: Search form contains 'subject' but no 'catalogNum' - search by subject ONLY
         if (catalogNum == undefined || catalogNum === "") {
           subject = subject.toUpperCase();
-          Caesar.getCourses(term, subject, function(err, courses) {
+          Caesar.getCourses(4540, subject, function(err, courses) {
 
             // Iterate through the search results and store the top 7 values
             $.each(courses, function(index, element) {
@@ -419,7 +410,7 @@ var test4 = {
         // CASE 2: Search form contains 'subject' and 'catalogNum' - search by BOTH
         } else {
           subject = subject.toUpperCase();
-          Caesar.getCourses(term, subject, function(err, courses) {
+          Caesar.getCourses(4540, subject, function(err, courses) {
 
             // Iterate through the search results and store the top 7 values that match catalogNum
             $.each(courses, function(index, element) {
@@ -491,10 +482,13 @@ var test4 = {
             $('<div/>', { 'class':"col-lg-8 col-md-8 col-sm-8 col-xs-8",
                           'text' :$(this).data("courseData").subject + " " +  $(this).data("courseData").catalog_num + "-" + $(this).data("courseData").section }),
             $('<div/>', { 'class':"col-lg-12 col-md-12 col-sm-12 col-xs-12" }).append(
-              $('<div/>', { 'class':"m-btn-group prefs toggle-buttons"}).append(
-                $('<button/>', { 'class':"m-btn pref", 'text':"Mandatory" }),
-                $('<button/>', { 'class':"m-btn pref", 'text':"Preferred" }),
-                $('<button/>', { 'class':"m-btn pref", 'text':"Optional" })))),
+              $('<div/>', { 'class':"btn-group prefs", 'data-toggle':"buttons" }).append(
+                $('<label/>', { 'class':"btn btn-default pref active", 'text':"Mandatory" }).append(
+                  $('<input/>', { 'type':"radio", 'name':"options", 'id':"option1", 'checked':"checked"})),
+                $('<label/>', { 'class':"btn btn-default pref", 'text':"Preferred" }).append(
+                  $('<input/>', { 'type':"radio", 'name':"options", 'id':"option2" })),
+                $('<label/>', { 'class':"btn btn-default pref", 'text':"Optional" }).append(
+                  $('<input/>', { 'type':"radio", 'name':"options", 'id':"option3" }))))),
             $('<div/>', { 'class':"panel-collapse collapse out col-xs-12 col-lg-12 col-md-12 col-sm-12", 'id':"collapse" + $(this).data("courseData").catalog_num })
         ).data('courseData', $(this).data('courseData')));
       
