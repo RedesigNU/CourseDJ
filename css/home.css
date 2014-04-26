@@ -1,21 +1,26 @@
-html, body, #everything, #left-box{
+html, body{
     height:100%;
-    margin:0;
+    margin:0px;
+    padding:0px;
+    overflow:hidden;
+}
+
+#everything, #left-box{
+    height:100%;
+    margin:0px;
 }
 
 #search, #preferences{
     height:50%; 
-    margin:0;
+    margin:0px;
 }
 
-#calendar{
-    margin:0;
+#calendar-box{
+    height:100%;   
 }
 
-._7 > td.tue{
-    background-color:red;   
-}
-
-._83 > td.fri{
-    background-color:green;   
+.dhx_cal_container{
+    width:auto;
+    height:100%;
+    padding:10px;
 }
