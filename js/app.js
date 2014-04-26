@@ -168,6 +168,14 @@
       clearTimeout(timer);
     });
 
+    function generateList(idIn, elementIn) {
+      jQuery('<li/>', {
+        id: idIn,
+        class: "listButton",
+        text: "[" + elementIn.subject + " " + elementIn.catalog_num + "] " + elementIn.title
+      }).appendTo('#results');
+    }
+
     // The search function itself
     function search() {
 
@@ -200,7 +208,7 @@
             // Add it to the website!
             $('#results').empty();
             $.each(searchResults, function(index, element) {
-              $('#results').append("<li>[" + element.subject + " " + element.catalog_num + "] " + element.title + "</li>");
+              generateList(index, element);
             });
           });
 
@@ -219,7 +227,7 @@
             // Add it to the website!
             $('#results').empty();
             $.each(searchResults, function(index, element) {
-              $('#results').append("<li>[" + element.subject + " " + element.catalog_num + "] " + element.title + "</li>");
+              generateList(index, element);
             });
           });
         }
