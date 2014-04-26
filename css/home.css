@@ -30,6 +30,7 @@ body{
     padding:0px 10px 0px 0px;
     height:100%;
     margin:0px;
+    overflow:scroll;
 }
 
 .subheading{
@@ -84,13 +85,17 @@ body{
 .prefs{
     display:table;  
     width:100%;
+    height:3em;
 }
 
 .pref{
     display:table-cell; 
     width:33.33333%;
-    font-size:13px;
+    height:3em;
+    font-size:0.6em;
     font-family:"Droid Sans";
+    padding-left:0px;
+    padding-right:0px;
 }
 
 #attributes{
@@ -118,4 +123,10 @@ body{
 
 .listButton:hover {
     background-color: darkgray;
+}
+
+.form-control:focus{
+    border-color:#4F165E;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(79,22,94,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(79,22,94,.6);
 }

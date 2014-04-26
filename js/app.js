@@ -150,7 +150,7 @@ var test4 = {
     //console.log("filtered courses:");
     //console.log(filteredCourses);
 /*    console.log(filteredCourses[20]);
-    console.log(Timeslot.fromClass(filteredCourses[20]));*/
+    console.log(Timeslot.fromClass(filteredCourses[20]));
     allTimeslots = Timeslot.fromClass(filteredCourses[20]);
     //displayCalendar();
   });
@@ -391,11 +391,11 @@ var test4 = {
     function addCourse(e) {
       $('#added-classes').append(
         $('<div/>', { 'class':"added-class row" }).append(
-          $('<div/>', { 'class':"col-lg-1 col-md-1 col-sm-1" }).append(
+          $('<div/>', { 'class':"col-lg-1 col-md-1 col-sm-1 col-xs-1" }).append(
             $('<span/>', { 'class':"glyphicon glyphicon-remove" })),
-          $('<div/>', { 'class':"col-lg-3 col-md-3 col-sm-8",
+          $('<div/>', { 'class':"col-lg-8 col-md-8 col-sm-8 col-xs-8",
                         'text' :$(this).data("courseData").subject + " " +  $(this).data("courseData").catalog_num }),
-          $('<div/>', { 'class':"col-lg-8 col-md-8" }).append(
+          $('<div/>', { 'class':"col-lg-12 col-md-12 col-sm-12 col-xs-12" }).append(
             $('<div/>', { 'class':"btn-group prefs", 'data-toggle':"buttons" }).append(
               $('<label/>', { 'class':"btn btn-default pref", 'text':"Mandatory" }).append(
                 $('<input/>', { 'type':"radio", 'name':"options", 'id':"option1" })),
