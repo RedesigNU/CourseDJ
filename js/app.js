@@ -233,11 +233,11 @@ var test4 = {
     }
 
     if (numClasses < numberOfClasses) {
-      alert("Couldn't meet your required number of classes. Try adding more!")
+      $('#unfulfilledReqsModal').modal();
     }
 
     if (mandatoryConflict) {
-      alert("Some of your mandatory classes conflict!");
+      $('#mandatoryClassesConflictModal').modal();
     }
   }
   
