@@ -19,7 +19,7 @@ body{
     width:100%;
     position:absolute;
     background-image:url("../img/sunset1.jpg");
-    z-index:3;
+    z-index:6;
     display:inline;
     padding-top:20em;
     padding-right:45em;
@@ -71,10 +71,19 @@ body{
     color:white;
 }
 
-#aboutdiv{
-    padding:20em;
+#about-div{
+    padding:20em 45em 0em 0em;
     height:100%;
     text-align:center;
+}
+
+#info{
+    z-index:5;
+    position:absolute;
+    display:none;
+    background-image:url("../img/sunset1.jpg");
+    height:100%;
+    width:100%;
 }
 
 #left-box{

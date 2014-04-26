@@ -2,4 +2,10 @@ $(document).ready(function(){
     $("#start").click(function(){
         $("#welcome").fadeOut(650);
     });
+    $("#about").click(function(){
+        $("#info").fadeIn(650); 
+    });
+    $("#back").click(function(){
+        $("#info").fadeOut(650);   
+    });
 });
