@@ -394,6 +394,12 @@ var test4 = {
 
     // Add course dropdown list on the left sidebar
     function addCourse(e) {
+
+      var labs = $(this).data(courseData).coursecomponent_set;
+      if (labs.length > 0) {
+        
+      }
+
       $('#added-classes').append(
         $('<div/>', { 'class':"added-class row" }).append(
           $('<div/>', { 'class':"col-lg-1 col-md-1 col-sm-1 col-xs-1" }).append(
@@ -407,14 +413,9 @@ var test4 = {
               $('<label/>', { 'class':"btn btn-default pref", 'text':"Preferred" }).append(
                 $('<input/>', { 'type':"radio", 'name':"options", 'id':"option2" })),
               $('<label/>', { 'class':"btn btn-default pref", 'text':"Optional" }).append(
-                $('<input/>', { 'type':"radio", 'name':"options", 'id':"option3" })))))
-        .data('courseData', $(this).data('courseData')));
+                $('<input/>', { 'type':"radio", 'name':"options", 'id':"option3" }))))).data('courseData', $(this).data('courseData')));
+      
 
-      /*jQuery('<div/>', {
-        class:".added-class.row",
-        text: 
-      }).append()
-      console.log($(this).data("courseData"));*/
     }
 
     function refreshCalendar() {
