@@ -34,13 +34,11 @@ body{
 }
 
 #welcome p{
-    color:white;
     font-size:10em;
     background-image:none;
 }
 
 #subheading{
-    color:white;
     font-size:2em;
 }
 
@@ -52,7 +50,6 @@ body{
 #header{
     text-align:left;
     padding-left:20px;
-    color:#ffffff;
 }
 
 #everything{
@@ -63,12 +60,10 @@ body{
 
 #aboutpara{
     font-size:37px;
-    color:white;
 }
 
 .abouttext{
     font-size:17px;
-    color:white;
     text-align:right;
     margin-left:20em;
 }
@@ -90,7 +85,6 @@ body{
     padding-top:0em;
     text-align:right;
     font-size:18px;
-    color:white;
     width:50%;
 }
 
@@ -193,7 +187,7 @@ body{
     text-align:center;
 }
 
-a:visited{
+a:visited, .white{
     color:white;
 }
 
