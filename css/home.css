@@ -10,7 +10,7 @@ body{
     background-image:url("../img/sunset1.jpg");
 }
 
-#title{
+.title{
     font-size:50px;   
 }
 
@@ -54,12 +54,17 @@ body{
 #header{
     text-align:left;
     padding-left:20px;
+    padding-top:10px;
+}
+
+#header img{
+    margin-bottom:25px;
 }
 
 #everything{
     height:86%;
-    margin:0px 10px 0px 10px;
-    padding:10px;
+    margin:-10px 10px 0px 10px;
+    padding:0px 10px 10px 10px;
 }
 
 #aboutpara{
@@ -90,6 +95,10 @@ body{
     text-align:right;
     font-size:18px;
     width:50%;
+}
+
+#abt{
+    margin-top:5px;
 }
 
 #info{
@@ -232,4 +241,13 @@ a:visited, .white{
 
 #classSearchBar{
     border:1px solid #E6C0F2;
+}
+
+#submit img{
+    height:32px;
+    width:32px;
+}
+
+#submit button{
+    background-color:purple;
 }
