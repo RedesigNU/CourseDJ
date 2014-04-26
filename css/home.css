@@ -39,7 +39,9 @@ body{
 }
 
 #welcome img{
-    padding-bottom:5em;
+    padding-bottom:5.5em;
+    height:8%;
+    width:8%;
 }
 
 #subheading{
