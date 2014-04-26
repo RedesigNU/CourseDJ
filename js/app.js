@@ -116,12 +116,9 @@
     });*/
     //console.log("filtered courses:");
     //console.log(filteredCourses);
-      console.log("filtered courses length:");
-      console.log(filteredCourses.length);
     console.log(filteredCourses[20]);
     console.log(Timeslot.fromClass(filteredCourses[20]));
     timeslots = Timeslot.fromClass(filteredCourses[20]);
-      displayCalendar();
   });
 
 /*    Caesar.getTermCourses('4530', function(err, termCourses) {
@@ -139,7 +136,89 @@
       newData.end_date = timeslot.endTime;
       scheduleData.push(newData);
     })
-    scheduler.parse(scheduleData, "json");
   }
 
+  displayCalendar();
+  
+  /*
+   * SEARCH FUNCTION
+   */
+  $(document).ready(function() {
+
+    // When the timer counts down to 0 from 100ms, start the search
+    var timer;
+    var stoppedTypingInterval = 100;
+
+    // On key UP, clear the timer and restart the count down
+    $('#classSearchBar').keyup(function(e) {
+      clearTimeout(timer);
+      if (e.keyCode != 32) {          // Ignore the space bar
+        timer = setTimeout(search, stoppedTypingInterval);
+      }
+    });
+
+    // On key down, clear the timer but do not restart the count down
+    $('#classSearchBar').keydown(function() {
+      clearTimeout(timer);
+    });
+
+    // The search function itself
+    function search() {
+
+      // Split the forum input into left (subject) and right (catalog #) parts
+      // i.e. "EECS 211" is split to "EECS" and "211", respectively
+      var inputArr = $('#classSearchBar').val().split(" ");
+      var subject = inputArr[0];      // LEFT
+      var catalogNum = inputArr[1];   // RIGHT
+      
+      // Search depending on the inputs given by the user
+      // If the search form is not undefined/empty, then SEARCH
+      if ($('#classSearchBar').val() != undefined &&
+          $('#classSearchBar').val() !== "") {
+
+        // Hold search results in a temporary array of the top 'resultLimit' # of JSON objects
+        var searchResults = [];
+        var resultLimit = 7;
+
+        // CASE 1: Search form contains 'subject' but no 'catalogNum' - search by subject ONLY
+        if (catalogNum == undefined || catalogNum === "") {
+          Caesar.getCourses(4540, subject, function(err, courses) {
+
+            // Iterate through the search results and store the top 7 values
+            $.each(courses, function(index, element) {
+              if (searchResults.length < resultLimit) {
+                searchResults.push(element);
+              }
+            });
+
+            // Add it to the website!
+            $('#results').empty();
+            $.each(searchResults, function(index, element) {
+              $('#results').append("<div>[" + element.subject + " " + element.catalog_num + "] " + element.title + "</div>");
+            });
+          });
+
+        // CASE 2: Search form contains 'subject' and 'catalogNum' - search by BOTH
+        } else {
+          Caesar.getCourses(4540, subject, function(err, courses) {
+
+            // Iterate through the search results and store the top 7 values that match catalogNum
+            $.each(courses, function(index, element) {
+              if (searchResults.length < resultLimit && 
+                  element.catalog_num.startsWith(catalogNum)) {
+                searchResults.push(element);
+              }
+            });
+
+            // Add it to the website!
+            $('#results').empty();
+            $.each(searchResults, function(index, element) {
+              $('#results').append("<div>[" + element.subject + " " + element.catalog_num + "] " + element.title + "</div>");
+            });
+          });
+        }
+      }
+    }
+  });
+  
 }).call(this, window, window.document, window.jQuery);
