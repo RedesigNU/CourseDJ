@@ -2,10 +2,16 @@ html, body{
     height:100%;
     margin:0px;
     padding:0px;
-    overflow:hidden;
 }
 
-#everything, #left-box{
+#everything{
+    height:100%;
+    margin:0px;
+    padding:10px;
+}
+
+#left-box{
+    padding:0px 10px 0px 0px;
     height:100%;
     margin:0px;
 }
@@ -16,7 +22,8 @@ html, body{
 }
 
 #calendar-box{
-    height:100%;   
+    height:100%;
+    margin:0px;
 }
 
 .dhx_cal_container{
