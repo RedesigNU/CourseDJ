@@ -297,6 +297,10 @@ var test4 = {
    */
   $(document).ready(function() {
 
+    $('#add-event').click(function(e) {
+      $('#customEventModal').modal();
+    });
+
     $('#search').click(function(e){
       $(this).parent().attr('class', 'dropdown');
     });
