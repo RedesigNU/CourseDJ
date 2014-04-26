@@ -50,44 +50,47 @@
      */
     $(document).ready(function() {
 
-      // Create a set of functions
+      // When the timer counts down to 0 from 100ms, start the search
       var timer;
-      var stopTypeInterval = 100;
+      var stoppedTypingInterval = 100;
 
-      // On key up, start counting down
+      // On key UP, clear the timer and restart the count down
       $('#classSearchBar').keyup(function(e) {
         clearTimeout(timer);
-
-        if (e.keyCode != 32) {
-          timer = setTimeout(stopType, stopTypeInterval);
+        if (e.keyCode != 32) {          // Ignore the space bar
+          timer = setTimeout(search, stoppedTypingInterval);
         }
       });
 
-      // On key down, clear the countdown
+      // On key down, clear the timer but do not restart the count down
       $('#classSearchBar').keydown(function() {
         clearTimeout(timer);
       });
 
-      function stopType() {
-        var subject = $('#classSearchBar').val().split(" ")[0];
-        var classCode = $('#classSearchBar').val().split(" ")[1];
+      // The search function itself
+      function search() {
 
-        console.log(subject);
-        console.log(classCode);
+        // Split the forum input into left (subject) and right (catalog #) parts
+        // i.e. "EECS 211" is split to "EECS" and "211", respectively
+        var inputArr = $('#classSearchBar').val().split(" ");
+        var subject = inputArr[0];      // LEFT
+        var catalogNum = inputArr[1];   // RIGHT
         
-        // If the search form is not undefined/empty - commence searching
-        if (!($('#classSearchBar').val() == undefined || $('#classSearchBar').val() === "")) {
-          // Create an empty array to add stuff to
-          var searchResults = [];
+        // Search depending on the inputs given by the user
+        // If the search form is not undefined/empty, then SEARCH
+        if ($('#classSearchBar').val() != undefined &&
+            $('#classSearchBar').val() !== "") {
 
-          // Limit the number of elements to return
+          // Hold search results in a temporary array of the top 'resultLimit' # of JSON objects
+          var searchResults = [];
           var resultLimit = 7;
 
-          // If the search form contains a subject but no catalog_num - search by subject
-          if (classCode == undefined || classCode === "") {
+          // CASE 1: Search form contains 'subject' but no 'catalogNum' - search by subject ONLY
+          if (catalogNum == undefined || catalogNum === "") {
             Caesar.getCourses(4540, subject, function(err, courses) {
-              $.grep(courses, function(element, index) {
-                
+
+              // Iterate through the search results and store the top 7 values
+              $.each(courses, function(index, element) {
                 if (searchResults.length < resultLimit) {
                   searchResults.push(element);
                 }
@@ -95,26 +98,27 @@
 
               // Add it to the website!
               $('#results').empty();
-              $.grep(searchResults, function(element, index) {
-                $('#results').append("<div>" + element.title + " " + "(" + element.catalog_num + ") </div>");
+              $.each(searchResults, function(index, element) {
+                $('#results').append("<div>[" + element.subject + " " + element.catalog_num + "] " + element.title + "</div>");
               });
             });
 
-          // If the search form contains a subject and a catalog_num - search by both
+          // CASE 2: Search form contains 'subject' and 'catalogNum' - search by BOTH
           } else {
             Caesar.getCourses(4540, subject, function(err, courses) {
-              $.grep(courses, function(element, index) {
 
-                // Grep through courses of a subject and search for number given - if it matches, add it
-                if (element.catalog_num.startsWith(classCode) && searchResults.length < resultLimit) {
-                  searchResults = searchResults.concat(element);
+              // Iterate through the search results and store the top 7 values that match catalogNum
+              $.each(courses, function(index, element) {
+                if (searchResults.length < resultLimit && 
+                    element.catalog_num.startsWith(catalogNum)) {
+                  searchResults.push(element);
                 }
               });
 
               // Add it to the website!
               $('#results').empty();
-              $.grep(searchResults, function(element, index) {
-                $('#results').append("<div>" + element.title + " " + element.catalog_num + "</div>");
+              $.each(searchResults, function(index, element) {
+                $('#results').append("<div>[" + element.subject + " " + element.catalog_num + "] " + element.title + "</div>");
               });
             });
           }
