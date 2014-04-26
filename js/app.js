@@ -18,7 +18,6 @@ var test4 = {
   end_time: '12:00'
 };*/
 
-
 (function(window, document, $, undefined){
     if (typeof String.prototype.startsWith != 'function') {
       String.prototype.startsWith = function(str) {
@@ -141,20 +140,16 @@ var test4 = {
     return Caesar;
   }());
 
-  /*
+  
   Caesar.getCourses('4530', 'MATH', function(err, courses) {
     var filteredCourses = courses;
-        filteredCourses = $.grep(courses, function(course) {
-      return course.seats > 50;
-    });
-    //console.log("filtered courses:");
-    //console.log(filteredCourses);
-/*    console.log(filteredCourses[20]);
-    console.log(Timeslot.fromClass(filteredCourses[20]));
-    allTimeslots = Timeslot.fromClass(filteredCourses[20]);
-    //displayCalendar();
+    console.log("filtered courses:");
+    console.log(filteredCourses);
+    console.log(filteredCourses[10]);
+    timeslots = Timeslot.fromClass(filteredCourses[20]);
+    displayCalendar();
   });
-  */
+  
 
 /*    Caesar.getTermCourses('4530', function(err, termCourses) {
     console.log("term courses:");
@@ -233,17 +228,13 @@ var test4 = {
       for (var jj = 1; jj < timeslotGroups.length; jj++) {
         if (tsgConflict(mandatory[ii], mandatory[jj])) {
           mandatoryConflict = true;
-          alert(ii + ' ' + jj + ' ' + mandatoryConflict);
         }
       }
     }
 
     if (mandatoryConflict) {
-      alert('CONFLICT BETWEEN MANDATORY CLASSES');
       timeslots = [];
     }
-
-    alert('reached end of algorithm without dying');
   }
   
   function displayCalendar() {
