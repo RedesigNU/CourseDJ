@@ -1,4 +1,9 @@
 (function(window, document, $, undefined){
+    if (typeof String.prototype.startsWith != 'function') {
+      String.prototype.startsWith = function(str) {
+        return this.indexOf(str) == 0;
+      };
+    }
     var Caesar;
     Caesar = (function(){
       var base = 'http://vazzak2.ci.northwestern.edu/';
@@ -109,6 +114,9 @@
 
               // Iterate through the search results and store the top 7 values that match catalogNum
               $.each(courses, function(index, element) {
+                console.log(element);
+                console.log(element.catalog_num.startsWith);
+                console.log(searchResults);
                 if (searchResults.length < resultLimit && 
                     element.catalog_num.startsWith(catalogNum)) {
                   searchResults.push(element);
