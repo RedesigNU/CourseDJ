@@ -373,7 +373,7 @@ var test4 = {
 
     // Populate drop down menu w/ search results
     function generateList(idIn, elementIn) {
-      jQuery('<li/>', {
+      $('<li/>', {
         id: idIn,
         class: "listButton",
         text: "[" + elementIn.subject + " " + elementIn.catalog_num + "-" + elementIn.section + "] " + elementIn.title
