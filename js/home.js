@@ -3,6 +3,7 @@ $(document).ready(function(){
     scheduler.config.last_hour = 26;
     scheduler.config.start_on_monday = false;
     scheduler.config.dblclick_create = false;
+    scheduler.config.mark_now = true;
     scheduler.init('scheduler_here', new Date(), "week"); //Set for 1st week of qtr here
     
     var sample = [

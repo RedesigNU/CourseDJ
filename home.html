@@ -19,15 +19,112 @@
     </head>
     <body>
         <div class="row" id="everything">
-            <div class="col-sm-3 col-md-3 col-lg-3" id="left-box">
-                <div class="panel panel-default" id="search">
-                    Class Search Box
-                </div>
+            <div class="col-sm-4 col-md-4 col-lg-3" id="left-box"> <!-- left box -->
                 <div class="panel panel-default" id="preferences">
-                    Preferences Box
+                    <div class="panel-heading">Preferences</div>
+                    <div class="panel-body">
+                        <div class="input-group" id="search">
+                            <input type="text" class="form-control" placeholder="Add a class or event">
+                        </div>
+                        <div id="added-classes"> <!-- added classes -->
+                            <div class="added-class row">
+                                <div class="col-lg-1 col-md-1 col-sm-1">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-8">
+                                    BIOL_SCI 216
+                                </div>
+                                <div class="col-lg-8 col-md-8">
+                                    <div class="btn-group prefs">
+                                      <button type="button" class="pref btn btn-default active">Mandatory</button>
+                                      <button type="button" class="pref btn btn-default">Preferred</button></button>
+                                      <button type="button" class="pref btn btn-default">Optional</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="added-class row">
+                                <div class="col-md-1 col-sm-1">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </div>
+                                <div class="col-md-3 col-sm-8">
+                                    EECS 211
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="btn-group prefs">
+                                      <button type="button" class="pref btn btn-default active">Mandatory</button>
+                                      <button type="button" class="pref btn btn-default">Preferred</button></button>
+                                      <button type="button" class="pref btn btn-default">Optional</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="added-class row">
+                                <div class="col-md-1 col-sm-1">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </div>
+                                <div class="col-md-3 col-sm-8">
+                                    BMD_ENG 270
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="btn-group prefs">
+                                      <button type="button" class="pref btn btn-default active">Mandatory</button>
+                                      <button type="button" class="pref btn btn-default">Preferred</button></button>
+                                      <button type="button" class="pref btn btn-default">Optional</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="added-class row">
+                                <div class="col-md-1 col-sm-1">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </div>
+                                <div class="col-md-3 col-sm-8">
+                                    MECH_ENG 433
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="btn-group prefs">
+                                      <button type="button" class="pref btn btn-default active">Mandatory</button>
+                                      <button type="button" class="pref btn btn-default">Preferred</button></button>
+                                      <button type="button" class="pref btn btn-default">Optional</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" id="class-count">
+                                <div class="col-sm-8">Number of classes:</div>
+                                <div class="col-sm-4">
+                                    <select class="form-control">
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        <option>6</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div> <!-- added classes -->
+                        <div id="attributes"> <!-- other attributes -->
+                            <p>Other Attributes</p>
+                            <div class="added-class">
+                                Time:
+                                <div class="btn-group prefs">
+                                      <button type="button" class="pref btn btn-default active">Earlier</button>
+                                      <button type="button" class="pref btn btn-default">Don't Care</button></button>
+                                      <button type="button" class="pref btn btn-default">Later</button>
+                                </div>
+                            </div>
+                            <div class="added-class">
+                                Class distribution:
+                                <div class="btn-group prefs">
+                                      <button type="button" class="pref btn btn-default active">Blocked</button>
+                                      <button type="button" class="pref btn btn-default">Don't Care</button></button>
+                                      <button type="button" class="pref btn btn-default">Scattered</button>
+                                </div>
+                            </div>
+                        </div> <!-- other attributes -->
+                        <div id="submit">
+                            <button type="button" class="btn btn-default btn-lg">Submit</button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-sm-9 col-md-9 col-lg-9 panel panel-default" id="calendar-box">
+            </div> <!-- left box -->
+            <div class="col-sm-8 col-md-8 col-lg-9 panel panel-default" id="right-box">
                 <div id="scheduler_here" class="dhx_cal_container">
                     <div class="dhx_cal_navline">
                         <div class="dhx_cal_date"></div>
@@ -35,10 +132,13 @@
                     <div class="dhx_cal_header"></div>
                     <div class="dhx_cal_data"></div>       
                 </div>
+                <div id="results-nav">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                    <span>1/4 Results</span>
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </div>
             </div>
-          
-            
-        </div><!--/.container-->
+        </div>
         
         
         
