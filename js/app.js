@@ -1,4 +1,10 @@
 (function(window, document, $, undefined){
+    if (typeof String.prototype.startsWith != 'function') {
+      String.prototype.startsWith = function(str) {
+        return this.indexOf(str) == 0;
+      };
+    }
+  
   var timeslots;
 
   var Timeslot;
@@ -220,5 +226,5 @@
       }
     }
   });
-  
+
 }).call(this, window, window.document, window.jQuery);
