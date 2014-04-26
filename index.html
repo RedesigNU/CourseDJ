@@ -26,8 +26,12 @@
                 <div class="panel panel-default" id="preferences">
                     <div class="panel-heading">Preferences</div>
                     <div class="panel-body">
-                        <div class="input-group" id="search">
-                            <input type="text" class="form-control" placeholder="Add a class or event">
+                        <div class="dropdown">
+                            <div class="input-group" id="search" data-toggle="dropdown">
+                                <input type="text" class="form-control" placeholder="Add a class or event" id="classSearchBar">
+                            </div>
+                            <ul class="dropdown-menu" role="menu" id="results">
+                            </ul>
                         </div>
                         <div id="added-classes"> <!-- added classes -->
                             <div class="added-class row">
@@ -146,13 +150,13 @@
                                 Class distribution:
                                 <div class="btn-group prefs" data-toggle="buttons">
                                     <label class="btn btn-default pref">
-                                        <input type="radio" name="options" id="option1">Earlier
+                                        <input type="radio" name="options" id="option1">Blocked
                                     </label>
                                     <label class="btn btn-default pref">
                                         <input type="radio" name="options" id="option2">Don't Care
                                     </label>
                                     <label class="btn btn-default pref">
-                                        <input type="radio" name="options" id="option3">Later
+                                        <input type="radio" name="options" id="option3">Spread Out
                                     </label>
                                 </div>
                             </div>

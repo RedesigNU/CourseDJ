@@ -196,11 +196,11 @@
                 searchResults.push(element);
               }
             });
-
+            
             // Add it to the website!
             $('#results').empty();
             $.each(searchResults, function(index, element) {
-              $('#results').append("<div>[" + element.subject + " " + element.catalog_num + "] " + element.title + "</div>");
+              $('#results').append("<li>[" + element.subject + " " + element.catalog_num + "] " + element.title + "</li>");
             });
           });
 
@@ -219,7 +219,7 @@
             // Add it to the website!
             $('#results').empty();
             $.each(searchResults, function(index, element) {
-              $('#results').append("<div>[" + element.subject + " " + element.catalog_num + "] " + element.title + "</div>");
+              $('#results').append("<li>[" + element.subject + " " + element.catalog_num + "] " + element.title + "</li>");
             });
           });
         }
