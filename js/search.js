@@ -114,9 +114,6 @@
 
               // Iterate through the search results and store the top 7 values that match catalogNum
               $.each(courses, function(index, element) {
-                console.log(element);
-                console.log(element.catalog_num.startsWith);
-                console.log(searchResults);
                 if (searchResults.length < resultLimit && 
                     element.catalog_num.startsWith(catalogNum)) {
                   searchResults.push(element);
