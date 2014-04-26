@@ -10,5 +10,14 @@ $(document).ready(function(){
     {id:3, text:"Interview", start_date:"04/24/2014 09:00",end_date:"04/24/2014 10:00", color:"green"}
     ];
 
+    scheduler.attachEvent("onBeforeDrag", function(id, mode, e){
+        return false;
+    });
+
+    scheduler.attachEvent("onClick", function(id, mode, e){
+        console.log("hi");
+        return false;
+    });
+
     scheduler.parse(sample, "json");//takes the name and format of the data source
 });
