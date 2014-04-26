@@ -143,14 +143,6 @@ var test4 = {
     return Caesar;
   }());
 
-  
-  Caesar.getCourses('4530', 'MATH', function(err, courses) {
-    var filteredCourses = courses;
-    timeslots = Timeslot.fromClass(filteredCourses[20]);
-    displayCalendar();
-  });
-  
-
   function algorithm() {
     //give an array of timeslots
 /*    var TimeslotGroup = (function() {
