@@ -167,9 +167,9 @@ var test4 = {
 
     function conflict(ts1, ts2) {
       return (ts1.startTime <= ts2.endTime && ts1.startTime >= ts2.startTime ||
-          ts2.startTime <= ts1.endTime && ts2.startTime >= ts1.startTime ||
-          ts1.startTime <= ts2.startTime && ts1.endTime >= ts2.endTime ||
-          ts2.startTime <= ts1.startTime && ts2.endTime >= ts1.endTime);
+        ts2.startTime <= ts1.endTime && ts2.startTime >= ts1.startTime ||
+        ts1.startTime <= ts2.startTime && ts1.endTime >= ts2.endTime ||
+        ts2.startTime <= ts1.startTime && ts2.endTime >= ts1.endTime);
     }
 
     //add all mandatory timeslots
@@ -213,22 +213,30 @@ var test4 = {
 
     console.log('alltimeslots: ' + allTimeslots.length);
 
+    console.log(allTimeslots);
+
     var ii = 0;
     while(numClasses < numberOfClasses && ii < allTimeslots.length) {
-      console.log(ii);
       var testCases = allTimeslots[ii];
       var anyConflict = false;
+      console.log('timeslots length: ' + timeslots.length);
+      console.log('testcases length' + testCases.length);
       for (var jj = 0; jj < timeslots.length; jj++) {
-        if (conflict(timeslots[jj], testCases[ii])) {
-          anyConflict = true;
+        for (var kk = 0; kk < testCases.length; kk++) {
+           if (conflict(timeslots[jj], testCases[kk])) {
+            anyConflict = true;
+          } 
         }
       }
 
       if (!anyConflict) {
+        // console.log('timeslots');
+        // console.log(timeslots);
+        // console.log('testcases');
+        // console.log(testCases);
         timeslots = timeslots.concat(testCases);
         numClasses++;
       }
-
       ii++;
     }
 
