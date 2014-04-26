@@ -1,5 +1,5 @@
 $(document).ready(function(){
     $("#start").click(function(){
-        $("#welcome").fadeOut(600);
+        $("#welcome").fadeOut(650);
     });
 });
