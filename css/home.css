@@ -62,19 +62,36 @@ body{
 }
 
 #aboutpara{
-    font-size:30px;
+    font-size:37px;
     color:white;
 }
 
-#abouttext{
+.abouttext{
     font-size:17px;
     color:white;
+    text-align:right;
+    margin-left:20em;
 }
 
 #about-div{
-    padding:20em 45em 0em 0em;
-    height:100%;
+    padding:10em 45em 5em 0em;
     text-align:center;
+}
+
+.img{
+    padding-left:30px;
+    padding-bottom:5px;
+    height:40px;
+    width:auto;
+}
+
+#aboutleft{
+    margin-left:5em;
+    padding-top:0em;
+    text-align:right;
+    font-size:18px;
+    color:white;
+    width:50%;
 }
 
 #info{
