@@ -389,31 +389,34 @@ var test4 = {
     }
 
     function removeCourse(e) {
-      $(this).parent().remove();
+      $(this).parent().parent().remove();
     }
 
     // Add course dropdown list on the left sidebar
     function addCourse(e) {
 
-      var labs = $(this).data(courseData).coursecomponent_set;
+      var labs = $(this).data("courseData").coursecomponent_set;
       if (labs.length > 0) {
-        
+        console.log(labs);
       }
 
       $('#added-classes').append(
-        $('<div/>', { 'class':"added-class row" }).append(
-          $('<div/>', { 'class':"col-lg-1 col-md-1 col-sm-1 col-xs-1" }).append(
-            $('<span/>', { 'class':"glyphicon glyphicon-remove" })).click(removeCourse),
-          $('<div/>', { 'class':"col-lg-8 col-md-8 col-sm-8 col-xs-8",
+        $('<div/>', { 'class':"added-class row panel panel-default" }).append(
+          $('<a/>', { 'data-toggle':"collapse", 'href':"#collapse"+$(this).data("courseData").catalog_num}).append(  
+            $('<div/>', { 'class':"col-lg-1 col-md-1 col-sm-1 col-xs-1" }).append(
+              $('<span/>', { 'class':"glyphicon glyphicon-remove" })).click(removeCourse),
+            $('<div/>', { 'class':"col-lg-8 col-md-8 col-sm-8 col-xs-8",
                         'text' :$(this).data("courseData").subject + " " +  $(this).data("courseData").catalog_num + "-" + $(this).data("courseData").section }),
-          $('<div/>', { 'class':"col-lg-12 col-md-12 col-sm-12 col-xs-12" }).append(
-            $('<div/>', { 'class':"btn-group prefs", 'data-toggle':"buttons" }).append(
-              $('<label/>', { 'class':"btn btn-default pref", 'text':"Mandatory" }).append(
-                $('<input/>', { 'type':"radio", 'name':"options", 'id':"option1" })),
-              $('<label/>', { 'class':"btn btn-default pref", 'text':"Preferred" }).append(
-                $('<input/>', { 'type':"radio", 'name':"options", 'id':"option2" })),
-              $('<label/>', { 'class':"btn btn-default pref", 'text':"Optional" }).append(
-                $('<input/>', { 'type':"radio", 'name':"options", 'id':"option3" }))))).data('courseData', $(this).data('courseData')));
+            $('<div/>', { 'class':"col-lg-12 col-md-12 col-sm-12 col-xs-12" }).append(
+              $('<div/>', { 'class':"btn-group prefs", 'data-toggle':"buttons" }).append(
+                $('<label/>', { 'class':"btn btn-default pref", 'text':"Mandatory" }).append(
+                  $('<input/>', { 'type':"radio", 'name':"options", 'id':"option1" })),
+                $('<label/>', { 'class':"btn btn-default pref", 'text':"Preferred" }).append(
+                  $('<input/>', { 'type':"radio", 'name':"options", 'id':"option2" })),
+                $('<label/>', { 'class':"btn btn-default pref", 'text':"Optional" }).append(
+                  $('<input/>', { 'type':"radio", 'name':"options", 'id':"option3" }))))),
+            $('<div/>', { 'class':"panel-collapse collapse out col-xs-12 col-lg-12 col-md-12 col-sm-12", 'id':"collapse"+$(this).data("courseData").catalog_num, 'text':labs})
+        ).data('courseData', $(this).data('courseData')));
       
 
     }
