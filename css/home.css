@@ -10,7 +10,7 @@ body{
     background-image:url("../img/sunset1.jpg");
 }
 
-#title{
+.title{
     font-size:50px;   
 }
 
@@ -33,14 +33,16 @@ body{
     display:inline;
 }
 
-#welcome p{
-    color:white;
+#welcome span{
     font-size:10em;
     background-image:none;
 }
 
+#welcome img{
+    padding-bottom:5em;
+}
+
 #subheading{
-    color:white;
     font-size:2em;
 }
 
@@ -52,29 +54,51 @@ body{
 #header{
     text-align:left;
     padding-left:20px;
-    color:#ffffff;
+    padding-top:10px;
+}
+
+#header img{
+    margin-bottom:25px;
 }
 
 #everything{
     height:86%;
-    margin:0px 10px 0px 10px;
-    padding:10px;
+    margin:-10px 10px 0px 10px;
+    padding:0px 10px 10px 10px;
 }
 
 #aboutpara{
-    font-size:30px;
-    color:white;
+    font-size:37px;
 }
 
-#abouttext{
+.abouttext{
     font-size:17px;
-    color:white;
+    text-align:right;
+    margin-left:20em;
 }
 
 #about-div{
-    padding:20em 45em 0em 0em;
-    height:100%;
+    padding:10em 45em 5em 0em;
     text-align:center;
+}
+
+.img{
+    padding-left:30px;
+    padding-bottom:5px;
+    height:40px;
+    width:auto;
+}
+
+#aboutleft{
+    margin-left:5em;
+    padding-top:0em;
+    text-align:right;
+    font-size:18px;
+    width:50%;
+}
+
+#abt{
+    margin-top:5px;
 }
 
 #info{
@@ -117,7 +141,7 @@ body{
 
 .dhx_cal_container{
     width:auto;
-    height:90%;
+    height:95%;
     padding:10px;
 }
 
@@ -141,6 +165,7 @@ body{
 .added-class{
     padding:5px;
     margin:3px 0px 3px 0px;
+    border:1px solid #490062;
 }
 
 .added-class>a{
@@ -176,7 +201,7 @@ body{
     text-align:center;
 }
 
-a:visited{
+a:visited, .white{
     color:white;
 }
 
@@ -195,12 +220,34 @@ a:visited{
 }
 
 .form-control:focus{
-    border-color:#4F165E;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(79,22,94,.6);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(79,22,94,.6);
+    border-color:#490062;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(49,00,62,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(49,00,62,.6);
 }
 
 .glyphicon-remove {
     cursor: pointer;
     cursor: hand;
+}
+
+.labButton:hover {
+    background-color: darkgray;
+}
+
+.sidebar {
+    overflow-y: auto;
+    height: 90%;
+}
+
+#classSearchBar{
+    border:1px solid #E6C0F2;
+}
+
+#submit img{
+    height:32px;
+    width:32px;
+}
+
+#submit button{
+    background-color:purple;
 }
