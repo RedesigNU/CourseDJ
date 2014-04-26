@@ -14,6 +14,41 @@ body{
     font-size:50px;   
 }
 
+#welcome{
+    height:100%;
+    width:100%;
+    position:absolute;
+    background-image:url("../img/sunset1.jpg");
+    z-index:3;
+    display:inline;
+    padding-top:20em;
+    padding-right:45em;
+}
+
+#welcome>div{
+    text-align:center;   
+}
+
+#main{
+    display:inline;
+}
+
+#welcome p{
+    color:white;
+    font-size:10em;
+    background-image:none;
+}
+
+#subheading{
+    color:white;
+    font-size:2em;
+}
+
+#start{
+    width:10em;
+    margin-top:1em;
+}
+
 #header{
     text-align:left;
     padding-left:20px;
