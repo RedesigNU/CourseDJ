@@ -309,8 +309,8 @@ var test4 = {
       var courseData = {
         type: 'custom',
         meeting_days: '',
-        start_time: $('#startHour').val() + ':' + $('#startMinnute').val() + ':00',
-        end_time: $('#endHour').val() + ':' + $('#endMinnute').val() + ':00',
+        start_time: $('#startHour').val() + ':' + $('#startMinute').val() + ':00',
+        end_time: $('#endHour').val() + ':' + $('#endMinute').val() + ':00',
         shortText: $('#name').val()
       };
 
@@ -345,7 +345,7 @@ var test4 = {
                 $('<label/>', { 'class':"btn btn-default pref", 'text':"Optional" }).append(
                   $('<input/>', { 'type':"radio", 'name':"options", 'id':"option3" }))))),
             $('<div/>', { 'class':"panel-collapse collapse out col-xs-12 col-lg-12 col-md-12 col-sm-12" })
-        ).data('courseData', $(this).data('courseData')));
+        ).data('courseData', courseData));
     });
 
     $('#add-event').click(function(e) {
@@ -561,11 +561,12 @@ var test4 = {
             color: pastel[Math.floor(Math.random()*8)]
             }));
           allTimeslots.push(newTimeslotArray);
-        }
+        } else {
         allTimeslots.push(Timeslot.fromClass(courseData, pri == 1.0 ? 1.0 : (pri + Math.random() * 0.2 ).clamp(0, 0.98),
           'Professor: ' + courseData.instructor.name + '<br>' +
           'Meeting time: ' + courseData.start_time + '-' + courseData.end_time + '<br>' +
           'Classroom: ' + courseData.room, pastel[Math.floor(Math.random()*8)]));
+        }
       });
       numberOfClasses = $('select').val();
       console.log(allTimeslots.length);
