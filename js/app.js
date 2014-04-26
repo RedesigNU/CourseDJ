@@ -354,6 +354,16 @@ var test4 = {
 
     // Populate drop down menu w/ search results
     function generateList(idIn, elementIn) {
+      var skip = false;
+      $('.added-class').each(function(index) {
+        var courseData = $(this).data('courseData');
+        if (courseData.subject == elementIn.subject && courseData.catalog_num == elementIn.catalog_num && courseData.section == elementIn.section) {
+          skip = true;
+          return;
+        }
+      });
+      if (skip)
+        return;
       $('<li/>', {
         id: idIn,
         class: "listButton",
@@ -368,10 +378,22 @@ var test4 = {
     // Add course dropdown list on the left sidebar
     function addCourse(e) {
 
-      var labs = $(this).data("courseData").coursecomponent_set;
+      var courseData = $(this).data("courseData");
+      var labs = courseData.coursecomponent_set;
       if (labs.length > 0) {
         console.log(labs);
       }
+
+      var skip = false;
+      $('.added-class').each(function(index) {
+        var courseData2 = $(this).data('courseData');
+        if (courseData.subject == courseData2.subject && courseData.catalog_num == courseData2.catalog_num && courseData.section == courseData2.section) {
+          skip = true;
+          return;
+        }
+      });
+      if (skip)
+        return;
 
       $('#added-classes').append(
         $('<div/>', { 'class':"added-class row panel panel-default" }).append(
