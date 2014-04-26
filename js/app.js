@@ -387,7 +387,7 @@ var test4 = {
           $('<div/>', { 'class':"col-lg-1 col-md-1 col-sm-1 col-xs-1" }).append(
             $('<span/>', { 'class':"glyphicon glyphicon-remove" })).click(removeCourse),
           $('<div/>', { 'class':"col-lg-8 col-md-8 col-sm-8 col-xs-8",
-                        'text' :$(this).data("courseData").subject + " " +  $(this).data("courseData").catalog_num }),
+                        'text' :$(this).data("courseData").subject + " " +  $(this).data("courseData").catalog_num + "-" + $(this).data("courseData").section }),
           $('<div/>', { 'class':"col-lg-12 col-md-12 col-sm-12 col-xs-12" }).append(
             $('<div/>', { 'class':"btn-group prefs", 'data-toggle':"buttons" }).append(
               $('<label/>', { 'class':"btn btn-default pref", 'text':"Mandatory" }).append(
