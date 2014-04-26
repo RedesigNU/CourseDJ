@@ -240,19 +240,19 @@
     // Add course dropdown list on the left sidebar
     function addCourse(e) {
       $('#added-classes').append(
-        $('<div/>', { "class":'added-class row' }).append(
-          $('<div/>', { "class":'col-lg-3 col-md-3 col-sm-8' }).append(
-            $('<span/>', { "class":'glyphicon glyphicon-remove' })),
-          $('<div/>', { "class":'col-md-3 col-sm-8',
-                        "text" :$(this).data("courseData").subject + " " +  $(this).data("courseData").catalog_num }),
-          $('<div/>', { "class":"col-lg-8 col-md-8" }).append(
-            $('<div/>', { "class":"btn-group prefs", "data-toggle":"buttons" }).append(
-              $('<label/>', { "class":"btn btn-default pref", "text":"Mandatory" }).append(
-                $('<input/>', { "type":"radio", "name":"options", "id":"option1" })),
-              $('<label/>', { "class":"btn btn-default pref", "text":"Preferred" }).append(
-                $('<input/>', { "type":"radio", "name":"options", "id":"option2" })),
-              $('<label/>', { "class":"btn btn-default pref", "text":"Optional" }).append(
-                $('<input/>', { "type":"radio", "name":"options", "id":"option3" }))))));
+        $('<div/>', { 'class':"added-class row" }).append(
+          $('<div/>', { 'class':"col-lg-1 col-md-1 col-sm-1" }).append(
+            $('<span/>', { 'class':"glyphicon glyphicon-remove" })),
+          $('<div/>', { 'class':"col-lg-3 col-md-3 col-sm-8",
+                        'text' :$(this).data("courseData").subject + " " +  $(this).data("courseData").catalog_num }),
+          $('<div/>', { 'class':"col-lg-8 col-md-8" }).append(
+            $('<div/>', { 'class':"btn-group prefs", 'data-toggle':"buttons" }).append(
+              $('<label/>', { 'class':"btn btn-default pref", 'text':"Mandatory" }).append(
+                $('<input/>', { 'type':"radio", 'name':"options", 'id':"option1" })),
+              $('<label/>', { 'class':"btn btn-default pref", 'text':"Preferred" }).append(
+                $('<input/>', { 'type':"radio", 'name':"options", 'id':"option2" })),
+              $('<label/>', { 'class':"btn btn-default pref", 'text':"Optional" }).append(
+                $('<input/>', { 'type':"radio", 'name':"options", 'id':"option3" }))))));
 
       /*jQuery('<div/>', {
         class:".added-class.row",
