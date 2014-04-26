@@ -10,6 +10,10 @@ $(document).ready(function(){
         return false;
     });
 
+    $('.dhx_scale_bar').each(function(index, element) {
+        $(this).text($(this).text().substr(0,3));
+    });
+
     scheduler.attachEvent("onClick", function(id, e){
         console.log(id);
         console.log(scheduler.getEvent(id));
