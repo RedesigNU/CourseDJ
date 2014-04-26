@@ -30,7 +30,7 @@ body{
     padding:0px 10px 0px 0px;
     height:100%;
     margin:0px;
-    overflow:scroll;
+    overflow:visible;
 }
 
 .subheading{
@@ -76,10 +76,6 @@ body{
 
 #added-classes{
     margin-top:10px;   
-}
-
-.added-class{
-    margin-top:5px;   
 }
 
 .prefs{
