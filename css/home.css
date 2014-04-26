@@ -33,9 +33,13 @@ body{
     display:inline;
 }
 
-#welcome p{
+#welcome span{
     font-size:10em;
     background-image:none;
+}
+
+#welcome img{
+    padding-bottom:5em;
 }
 
 #subheading{
