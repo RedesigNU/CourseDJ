@@ -7,7 +7,7 @@ html, body{
 }
 
 body{
-    background-image:url("../img/sunset1.jpg");
+    background-image:url("../img/dj2.jpg");
 }
 
 .title{
@@ -18,11 +18,11 @@ body{
     height:100%;
     width:100%;
     position:absolute;
-    background-image:url("../img/sunset1.jpg");
+    background-image:url("../img/dj2.jpg");
     z-index:6;
     display:inline;
     padding-top:20em;
-    padding-right:45em;
+    padding-right:55em;
 }
 
 #welcome>div{
@@ -107,7 +107,7 @@ body{
     z-index:5;
     position:absolute;
     display:none;
-    background-image:url("../img/sunset1.jpg");
+    background-image:url("../img/dj2.jpg");
     height:100%;
     width:100%;
 }
@@ -251,5 +251,5 @@ a:visited, .white{
 }
 
 #submit button{
-    background-color:purple;
+    background-color:black;
 }
