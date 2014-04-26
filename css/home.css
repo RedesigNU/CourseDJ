@@ -1,0 +1,13 @@
+html, body, #everything, #left-box{
+    height:100%;
+    margin:0;
+}
+
+#search, #preferences{
+    height:50%; 
+    margin:0;
+}
+
+#calendar{
+    margin:0;
+}
