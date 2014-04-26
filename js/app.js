@@ -25,6 +25,8 @@ var test4 = {
       };
     }
 
+    var groupingIndex = 0;
+
   var allTimeslots;
   var timeslots;
 
@@ -64,7 +66,7 @@ var test4 = {
           shortText: p_class.subject + ': ' + p_class.catalog_num,
           longText: 'hello',
           priority: 1.0,
-          grouping: 0
+          grouping: groupingIndex
         }
         var aTimeslot = new Timeslot(params);
         timeslots.push(aTimeslot);
@@ -143,18 +145,10 @@ var test4 = {
   
   Caesar.getCourses('4530', 'MATH', function(err, courses) {
     var filteredCourses = courses;
-    console.log("filtered courses:");
-    console.log(filteredCourses);
-    console.log(filteredCourses[10]);
     timeslots = Timeslot.fromClass(filteredCourses[20]);
     displayCalendar();
   });
   
-
-/*    Caesar.getTermCourses('4530', function(err, termCourses) {
-    console.log("term courses:");
-    console.log(termCourses);
-  });*/
 
   function algorithm() {
     //give an array of timeslots
@@ -193,7 +187,7 @@ var test4 = {
       return false;
     }
 
-    console.log(allTimeslots);
+    // console.log(allTimeslots);
 
     //create timeslot groups
     var timeslotGroups = [];
@@ -210,7 +204,7 @@ var test4 = {
       }
     }
     timeslotGroups.push(currTimeslotGroup);
-    console.log(timeslotGroups);
+    // console.log(timeslotGroups);
 
 
 
@@ -227,12 +221,14 @@ var test4 = {
     for (var ii = 0; ii < timeslotGroups.length - 1; ii++) {
       for (var jj = 1; jj < timeslotGroups.length; jj++) {
         if (tsgConflict(mandatory[ii], mandatory[jj])) {
+          alert(ii + ' ' + jj);
           mandatoryConflict = true;
         }
       }
     }
 
     if (mandatoryConflict) {
+      console.log("mandatory conflict!");
       timeslots = [];
     }
   }
@@ -259,7 +255,7 @@ var test4 = {
       this.grouping = params["grouping"];*/
 
 
-  allTimeslots = 
+ /* allTimeslots = 
   [new Timeslot({
     startTime: '11:00',
     endTime: '11:50',
@@ -286,7 +282,7 @@ var test4 = {
   })];
 
 
-  algorithm();
+  algorithm();*/
 
   
   /*
@@ -404,17 +400,25 @@ var test4 = {
     }
 
     function refreshCalendar() {
+      timeslots = [];
       $('.added-class').each(function(index) {
         var courseData = $(this).data('courseData');
         var inputs = $(this).find('input');
         var isMandatory = inputs.slice(0,1).is(':checked');
         var isPreferred = inputs.slice(1,2).is(':checked');
         var isOptional  = inputs.slice(2,3).is(':checked');
-        console.log(courseData);
-        console.log(isMandatory);
+        // console.log(courseData);
+        // console.log(isMandatory);
         //console.log($(this).children('input')[1].val());
         //console.log($(this).children('input')[2].val());
+        timeslots = timeslots.concat(Timeslot.fromClass(courseData));
       });
+      // console.log("submit!");
+      // console.log(timeslots);
+      // console.log("alltimeslots");
+      // console.log(allTimeSlots);
+      //algorithm();
+      displayCalendar();
     }
 
     $('#submit').click(refreshCalendar);
