@@ -25,7 +25,8 @@ var test4 = {
       };
     }
 
-    var groupingIndex = 0;
+    var groupingIndex = 1;
+
 
   var allTimeslots;
   var timeslots;
@@ -187,8 +188,6 @@ var test4 = {
       return false;
     }
 
-    // console.log(allTimeslots);
-
     //create timeslot groups
     var timeslotGroups = [];
     var currTimeslotGroup = [];
@@ -203,8 +202,13 @@ var test4 = {
         currTimeslotGroup.push(currTimeslot);
       }
     }
-    timeslotGroups.push(currTimeslotGroup);
-    // console.log(timeslotGroups);
+    if(currTimeslotGroup.length > 0)
+      timeslotGroups.push(currTimeslotGroup);
+    
+
+
+        console.log('length: ' + timeslotGroups.length);
+
 
 
 
@@ -212,10 +216,12 @@ var test4 = {
     var mandatory = [];
 
     for(var ii = 0; ii < timeslotGroups.length; ii++) {
-      if (timeslotGroups[ii][0].priority == 1.0) {
+      if (timeslotGroups[ii][0] && timeslotGroups[ii][0].priority == 1.0) {
         mandatory.push(timeslotGroups[ii]);
       }
     }
+    console.log(timeslotGroups);
+    console.log(mandatory);
 
     var mandatoryConflict = false;
     for (var ii = 0; ii < timeslotGroups.length - 1; ii++) {
@@ -231,9 +237,15 @@ var test4 = {
       console.log("mandatory conflict!");
       timeslots = [];
     }
+
+
+    for (var ii = 0; ii < timeslotGroups.length; ii++) {
+      timeslots = timeslots.concat(timeslotGroups[ii]);
+    }
   }
   
   function displayCalendar() {
+    scheduler.clearAll();
     var scheduleData = [];
     $.each(timeslots, function(index, timeslot) {
       var newData = {};
@@ -406,6 +418,7 @@ var test4 = {
     }
 
     function refreshCalendar() {
+      allTimeslots = [];
       timeslots = [];
       $('.added-class').each(function(index) {
         var courseData = $(this).data('courseData');
@@ -413,17 +426,14 @@ var test4 = {
         var isMandatory = labels.slice(0,1).hasClass('active');
         var isPreferred = labels.slice(1,2).hasClass('active');
         var isOptional  = labels.slice(2,3).hasClass('active');
-        console.log(courseData);
-        console.log(isMandatory);
+        // console.log(courseData);
+        // console.log(isMandatory);
         //console.log($(this).children('input')[1].val());
         //console.log($(this).children('input')[2].val());
-        timeslots = timeslots.concat(Timeslot.fromClass(courseData));
+        allTimeslots = allTimeslots.concat(Timeslot.fromClass(courseData));
+        //groupingIndex++;
       });
-      // console.log("submit!");
-      // console.log(timeslots);
-      // console.log("alltimeslots");
-      // console.log(allTimeSlots);
-      //algorithm();
+      algorithm();
       displayCalendar();
     }
 
