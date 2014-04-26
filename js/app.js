@@ -351,11 +351,12 @@ var test4 = {
         // Hold search results in a temporary array of the top 'resultLimit' # of JSON objects
         var searchResults = [];
         var resultLimit = 7;
+        var term = 4530;
 
         // CASE 1: Search form contains 'subject' but no 'catalogNum' - search by subject ONLY
         if (catalogNum == undefined || catalogNum === "") {
           subject = subject.toUpperCase();
-          Caesar.getCourses(4540, subject, function(err, courses) {
+          Caesar.getCourses(term, subject, function(err, courses) {
 
             // Iterate through the search results and store the top 7 values
             $.each(courses, function(index, element) {
@@ -375,7 +376,7 @@ var test4 = {
         // CASE 2: Search form contains 'subject' and 'catalogNum' - search by BOTH
         } else {
           subject = subject.toUpperCase();
-          Caesar.getCourses(4540, subject, function(err, courses) {
+          Caesar.getCourses(term, subject, function(err, courses) {
 
             // Iterate through the search results and store the top 7 values that match catalogNum
             $.each(courses, function(index, element) {
