@@ -49,7 +49,7 @@ var test4 = {
 
   var Timeslot;
   Timeslot = (function() {
-    Timeslot.fromClass = function(p_class, pri, lt) {
+    Timeslot.fromClass = function(p_class, pri, lt, clr) {
       var timeslots = [];
       var numTimeslots = p_class.meeting_days.length/2;
       for (var ii = 0; ii < numTimeslots; ii++) {
@@ -83,7 +83,8 @@ var test4 = {
           shortText: p_class.subject + ': ' + p_class.catalog_num,
           longText: lt,
           priority: pri,
-          conflicted: false
+          conflicted: false,
+          color: clr
         };
         var aTimeslot = new Timeslot(params);
         timeslots.push(aTimeslot);
@@ -101,6 +102,7 @@ var test4 = {
       this.longText = params["longText"];
       this.priority = params["priority"];
       this.conflicted = params["conflicted"];
+      this.color = params["color"];
     }
     return Timeslot;
   })();
@@ -230,7 +232,9 @@ var test4 = {
       ii++;
     }
 
-    //
+    if (numClasses < numberOfClasses) {
+      alert("Couldn't meet your required number of classes. Try adding more!")
+    }
 
     if (mandatoryConflict) {
       alert("Some of your mandatory classes conflict!");
@@ -246,7 +250,7 @@ var test4 = {
       newData.text = timeslot.shortText;
       newData.start_date = timeslot.startTime;
       newData.end_date = timeslot.endTime;
-      newData.color = timeslot.conflicted ? 'red' : pastel[Math.floor(Math.random()*6\8)];
+      newData.color = timeslot.conflicted ? 'red' : timeslot.color;
       newData.longText = timeslot.longText;
       scheduleData.push(newData);
     });
@@ -457,7 +461,7 @@ var test4 = {
         allTimeslots.push(Timeslot.fromClass(courseData, pri == 1.0 ? 1.0 : (pri + Math.random() * 0.2 ).clamp(0, 0.98),
           'Professor: ' + courseData.instructor.name + '<br>' +
           'Meeting time: ' + courseData.start_time + '-' + courseData.end_time + '<br>' +
-          'Classroom: ' + courseData.room));
+          'Classroom: ' + courseData.room, pastel[Math.floor(Math.random()*8)]));
       });
       numberOfClasses = $('select').val();
       console.log(allTimeslots.length);
