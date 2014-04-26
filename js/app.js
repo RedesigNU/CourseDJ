@@ -1,3 +1,24 @@
+/*var test1 = {
+  start_time: '11:00',
+  end_time: '11:50'
+};
+
+var test2 = {
+  start_time: '11:30',
+  end_time: '12:00'
+};
+
+var test3 = {
+  start_time: '11:00',
+  end_time: '11:30'
+};
+
+var test4 = {
+  start_time: '11:40',
+  end_time: '12:00'
+};*/
+
+
 (function(window, document, $, undefined){
     if (typeof String.prototype.startsWith != 'function') {
       String.prototype.startsWith = function(str) {
@@ -5,6 +26,7 @@
       };
     }
 
+  var allTimeslots;
   var timeslots;
 
   var Timeslot;
@@ -12,7 +34,7 @@
     Timeslot.fromClass = function(p_class) {
       var timeslots = [];
       var numTimeslots = p_class.meeting_days.length/2;
-      for (ii = 0; ii < numTimeslots; ii++) {
+      for (var ii = 0; ii < numTimeslots; ii++) {
         var currentDay = p_class.meeting_days.substr(ii*2, 2);
         switch (currentDay) {
           case 'Su': 
@@ -41,7 +63,9 @@
           startTime: currentDay + ' ' + p_class.start_time.substr(0, 5),
           endTime: currentDay + ' ' + p_class.end_time.substr(0, 5),
           shortText: p_class.subject + ': ' + p_class.catalog_num,
-          longText: 'hello'
+          longText: 'hello',
+          priority: 1.0,
+          grouping: 0
         }
         var aTimeslot = new Timeslot(params);
         timeslots.push(aTimeslot);
@@ -56,7 +80,9 @@
       this.startTime = params["startTime"];
       this.endTime = params["endTime"];
       this.shortText = params["shortText"];
-      this.longText = params["shortText"];
+      this.longText = params["longText"];
+      this.priority = params["priority"];
+      this.grouping = params["grouping"];
     }
     return Timeslot;
   })();
@@ -123,10 +149,10 @@
     });
     //console.log("filtered courses:");
     //console.log(filteredCourses);
-    console.log(filteredCourses[20]);
-    console.log(Timeslot.fromClass(filteredCourses[20]));
-    timeslots = Timeslot.fromClass(filteredCourses[20]);
-    displayCalendar();
+/*    console.log(filteredCourses[20]);
+    console.log(Timeslot.fromClass(filteredCourses[20]));*/
+    allTimeslots = Timeslot.fromClass(filteredCourses[20]);
+    //displayCalendar();
   });
   */
 
@@ -134,6 +160,91 @@
     console.log("term courses:");
     console.log(termCourses);
   });*/
+
+  function algorithm() {
+    //give an array of timeslots
+/*    var TimeslotGroup = (function() {
+      function TimeslotGroup('group') {
+        this.group = group;
+      }
+      return TimeslotGroup
+    })();
+
+    var timeslotGroups = [];
+    var currTimeslotGroup = new TimeslotGroup;
+    for(var ii = 0; ii < allTimeslots.length; ii++) {
+      if (currTimeslotGroup.group.length == 0 || currTimeslotGroup.group[0].grouping == allTimeslots[ii].grouping) {
+        currTimeslotGroup.push
+      }
+    }*/
+
+    function conflict(ts1, ts2) {
+      return (ts1.startTime <= ts2.endTime && ts1.startTime >= ts2.startTime ||
+          ts2.startTime <= ts1.endTime && ts2.startTime >= ts1.startTime ||
+          ts1.startTime <= ts2.startTime && ts1.endTime >= ts2.endTime ||
+          ts2.startTime <= ts1.startTime && ts2.endTime >= ts1.endTime);
+    }
+
+
+    //helper function
+    function tsgConflict(tsg1, tsg2) {
+      for (var ii = 0; ii < tsg1.length; ii++) {
+        for (var jj = 0; jj < tsg2.length; jj++) {
+          if (conflict(tsg1[ii], tsg2[jj])) {
+            return true;
+          }
+        }
+      }
+      return false;
+    }
+
+    console.log(allTimeslots);
+
+    //create timeslot groups
+    var timeslotGroups = [];
+    var currTimeslotGroup = [];
+    for (var ii = 0; ii < allTimeslots.length; ii++) {
+      var currTimeslot = allTimeslots[ii];
+      if (currTimeslotGroup.length == 0 || currTimeslotGroup[0].grouping == currTimeslot.grouping) {
+        currTimeslotGroup.push(currTimeslot);
+      }
+      else {
+        timeslotGroups.push(currTimeslotGroup);
+        currTimeslotGroup = [];
+        currTimeslotGroup.push(currTimeslot);
+      }
+    }
+    timeslotGroups.push(currTimeslotGroup);
+    console.log(timeslotGroups);
+
+
+
+    //add all mandatory groups
+    var mandatory = [];
+
+    for(var ii = 0; ii < timeslotGroups.length; ii++) {
+      if (timeslotGroups[ii][0].priority == 1.0) {
+        mandatory.push(timeslotGroups[ii]);
+      }
+    }
+
+    var mandatoryConflict = false;
+    for (var ii = 0; ii < timeslotGroups.length - 1; ii++) {
+      for (var jj = 1; jj < timeslotGroups.length; jj++) {
+        if (tsgConflict(mandatory[ii], mandatory[jj])) {
+          mandatoryConflict = true;
+          alert(ii + ' ' + jj + ' ' + mandatoryConflict);
+        }
+      }
+    }
+
+    if (mandatoryConflict) {
+      alert('CONFLICT BETWEEN MANDATORY CLASSES');
+      timeslots = [];
+    }
+
+    alert('reached end of algorithm without dying');
+  }
   
   function displayCalendar() {
     var scheduleData = [];
@@ -147,6 +258,45 @@
     })
     scheduler.parse(scheduleData, "json");
   }
+
+
+/*      this.startTime = params["startTime"];
+      this.endTime = params["endTime"];
+      this.shortText = params["shortText"];
+      this.longText = params["longText"];
+      this.priority = params["priority"];
+      this.grouping = params["grouping"];*/
+
+
+  allTimeslots = 
+  [new Timeslot({
+    startTime: '11:00',
+    endTime: '11:50',
+    shortText: 'abc',
+    longText: '',
+    priority: 1.0,
+    grouping: 1
+  }),
+  new Timeslot({
+    startTime: '11:55',
+    endTime: '12:00',
+    shortText: 'def',
+    longText: '',
+    priority: 1.0,
+    grouping: 2
+  }),
+  new Timeslot({
+    startTime: '11:30',
+    endTime: '12:00',
+    shortText: 'def',
+    longText: '',
+    priority: 1.0,
+    grouping: 2
+  })];
+
+
+  algorithm();
+
   
   /*
    * SEARCH FUNCTION
