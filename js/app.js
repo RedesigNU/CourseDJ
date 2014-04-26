@@ -299,7 +299,7 @@ var test4 = {
 
     $('#search').click(function(e){
       $(this).parent().attr('class', 'dropdown');
-    }
+    });
 
     $('.dhx_scale_bar').each(function(index, elem) {
       $(this).text($(this).text().substr(0,3));
@@ -407,8 +407,6 @@ var test4 = {
 
     // Add the course menu on the left sidebar
     function addCourse(e) {
-<<<<<<< HEAD
-=======
 
       var courseData = $(this).data("courseData");
       var labs = courseData.coursecomponent_set;
@@ -427,7 +425,6 @@ var test4 = {
       if (skip)
         return;
 
->>>>>>> 71039aa2b092ceac91dfd09d749a5f3bcce1167f
       $('#added-classes').append(
         $('<div/>', { 'class':"added-class row panel panel-default" }).append(
           $('<a/>', { 'data-toggle':"collapse", 'href':"#collapse"+$(this).data("courseData").catalog_num}).append(  // Trigger for holding labs array info
@@ -482,10 +479,7 @@ var test4 = {
         var isMandatory = labels.slice(0,1).hasClass('active');
         var isPreferred = labels.slice(1,2).hasClass('active');
         var isOptional  = labels.slice(2,3).hasClass('active');
-        // console.log(courseData);
-        // console.log(isMandatory);
-        //console.log($(this).children('input')[1].val());
-        //console.log($(this).children('input')[2].val());
+
         var pri;
         if (isMandatory) pri = 1.0;
         if (isPreferred) pri = 0.5;
