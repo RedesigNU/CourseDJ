@@ -447,13 +447,10 @@ var test4 = {
             $('<div/>', { 'class':"col-lg-8 col-md-8 col-sm-8 col-xs-8",
                           'text' :$(this).data("courseData").subject + " " +  $(this).data("courseData").catalog_num + "-" + $(this).data("courseData").section }),
             $('<div/>', { 'class':"col-lg-12 col-md-12 col-sm-12 col-xs-12" }).append(
-              $('<div/>', { 'class':"btn-group prefs", 'data-toggle':"buttons" }).append(
-                $('<label/>', { 'class':"btn btn-default pref active", 'text':"Mandatory" }).append(
-                  $('<input/>', { 'type':"radio", 'name':"options", 'id':"option1", 'checked':"checked"})),
-                $('<label/>', { 'class':"btn btn-default pref", 'text':"Preferred" }).append(
-                  $('<input/>', { 'type':"radio", 'name':"options", 'id':"option2" })),
-                $('<label/>', { 'class':"btn btn-default pref", 'text':"Optional" }).append(
-                  $('<input/>', { 'type':"radio", 'name':"options", 'id':"option3" }))))),
+              $('<div/>', { 'class':"m-btn-group prefs toggle-buttons"}).append(
+                $('<button/>', { 'class':"m-btn pref", 'text':"Mandatory" }),
+                $('<button/>', { 'class':"m-btn pref", 'text':"Preferred" }),
+                $('<button/>', { 'class':"m-btn pref", 'text':"Optional" })))),
             $('<div/>', { 'class':"panel-collapse collapse out col-xs-12 col-lg-12 col-md-12 col-sm-12", 'id':"collapse" + $(this).data("courseData").catalog_num })
         ).data('courseData', $(this).data('courseData')));
       
