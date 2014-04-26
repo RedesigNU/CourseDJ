@@ -535,10 +535,33 @@ var test4 = {
         var isPreferred = labels.slice(1,2).hasClass('active');
         var isOptional  = labels.slice(2,3).hasClass('active');
 
+
+
+      // this.startTime = params["startTime"];
+      // this.endTime = params["endTime"];
+      // this.shortText = params["shortText"];
+      // this.longText = params["longText"];
+      // this.priority = params["priority"];
+      // this.conflicted = params["conflicted"];
+      // this.color = params["color"];
+
         var pri;
         if (isMandatory) pri = 1.0;
         if (isPreferred) pri = 0.5;
         if (isOptional) pri = 0.0;
+        if (courseData.type == 'custom')
+        {
+          var newTimeslotArray = [];
+          newTimeslotArray.push(new Timeslot({
+            startTime: courseData.start_time,
+            endTime: courseData.end_time,
+            shortText: courseData.shortText,
+            longText: courseData.shortText,
+            conflicted: false,
+            color: pastel[Math.floor(Math.random()*8)]
+            }));
+          allTimeslots.push(newTimeslotArray);
+        }
         allTimeslots.push(Timeslot.fromClass(courseData, pri == 1.0 ? 1.0 : (pri + Math.random() * 0.2 ).clamp(0, 0.98),
           'Professor: ' + courseData.instructor.name + '<br>' +
           'Meeting time: ' + courseData.start_time + '-' + courseData.end_time + '<br>' +
