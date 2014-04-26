@@ -354,6 +354,7 @@ var test4 = {
             
             // Add it to the website!
             $('#results').empty();
+            $('#results').append('<li class="listButton" id="add-event">Add a custom event</li>');
             $.each(searchResults, function(index, element) {
               generateList(index, element);
             });
@@ -374,6 +375,7 @@ var test4 = {
 
             // Add it to the website!
             $('#results').empty();
+            $('#results').append('<li class="listButton" id="add-event">Add a custom event</li>');
             $.each(searchResults, function(index, element) {
               generateList(index, element);
             });
