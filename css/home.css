@@ -16,18 +16,58 @@ html, body{
     margin:0px;
 }
 
-#search, #preferences{
-    height:50%; 
+#preferences{
+    height:100%; 
     margin:0px;
 }
 
-#calendar-box{
+#right-box{
     height:100%;
     margin:0px;
 }
 
 .dhx_cal_container{
     width:auto;
-    height:100%;
+    height:90%;
     padding:10px;
+}
+
+#results-nav{
+    margin-top:20px;
+    text-align:center;
+}   
+
+#search{
+    width:100%;   
+}
+
+#added-classes{
+    margin-top:10px;   
+}
+
+.added-class{
+    margin-top:5px;   
+}
+
+.prefs{
+    display:table;  
+    width:100%;
+}
+
+.pref{
+    display:table-cell; 
+    width:33.33333%;
+}
+
+#attributes{
+    margin-top:15px;   
+}
+
+#class-count{
+    margin-top:25px;   
+}
+
+#submit{
+    margin-top:30px;
+    text-align:center;
 }
