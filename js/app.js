@@ -327,6 +327,7 @@ var test4 = {
 
         // CASE 1: Search form contains 'subject' but no 'catalogNum' - search by subject ONLY
         if (catalogNum == undefined || catalogNum === "") {
+          subject = subject.toUpperCase();
           Caesar.getCourses(4540, subject, function(err, courses) {
 
             // Iterate through the search results and store the top 7 values
@@ -345,6 +346,7 @@ var test4 = {
 
         // CASE 2: Search form contains 'subject' and 'catalogNum' - search by BOTH
         } else {
+          subject = subject.toUpperCase();
           Caesar.getCourses(4540, subject, function(err, courses) {
 
             // Iterate through the search results and store the top 7 values that match catalogNum
@@ -374,12 +376,16 @@ var test4 = {
       }).click(addCourse).data("courseData", elementIn).appendTo('#results');
     }
 
+    function removeCourse(e) {
+      $(this).parent().remove();
+    }
+
     // Add course dropdown list on the left sidebar
     function addCourse(e) {
       $('#added-classes').append(
         $('<div/>', { 'class':"added-class row" }).append(
           $('<div/>', { 'class':"col-lg-1 col-md-1 col-sm-1 col-xs-1" }).append(
-            $('<span/>', { 'class':"glyphicon glyphicon-remove" })),
+            $('<span/>', { 'class':"glyphicon glyphicon-remove" })).click(removeCourse),
           $('<div/>', { 'class':"col-lg-8 col-md-8 col-sm-8 col-xs-8",
                         'text' :$(this).data("courseData").subject + " " +  $(this).data("courseData").catalog_num }),
           $('<div/>', { 'class':"col-lg-12 col-md-12 col-sm-12 col-xs-12" }).append(
@@ -403,12 +409,12 @@ var test4 = {
       timeslots = [];
       $('.added-class').each(function(index) {
         var courseData = $(this).data('courseData');
-        var inputs = $(this).find('input');
-        var isMandatory = inputs.slice(0,1).is(':checked');
-        var isPreferred = inputs.slice(1,2).is(':checked');
-        var isOptional  = inputs.slice(2,3).is(':checked');
-        // console.log(courseData);
-        // console.log(isMandatory);
+        var labels = $(this).find('label');
+        var isMandatory = labels.slice(0,1).hasClass('active');
+        var isPreferred = labels.slice(1,2).hasClass('active');
+        var isOptional  = labels.slice(2,3).hasClass('active');
+        console.log(courseData);
+        console.log(isMandatory);
         //console.log($(this).children('input')[1].val());
         //console.log($(this).children('input')[2].val());
         timeslots = timeslots.concat(Timeslot.fromClass(courseData));
