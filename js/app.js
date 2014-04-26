@@ -31,6 +31,17 @@ var test4 = {
   return Math.min(Math.max(this, min), max);
 };
 
+  var pastel = [
+  '#5484ed',
+  '#51b749',
+  '#dbadff',
+  '#ff887c',
+  '#7ae7bf',
+  '#ffb878',
+  '#fbd75b',
+  '#a4bdfc'
+  ]
+
 
   var allTimeslots;
   var timeslots;
@@ -235,7 +246,7 @@ var test4 = {
       newData.text = timeslot.shortText;
       newData.start_date = timeslot.startTime;
       newData.end_date = timeslot.endTime;
-      newData.color = timeslot.conflicted ? 'red' : 'blue';
+      newData.color = timeslot.conflicted ? 'red' : pastel[Math.floor(Math.random()*6\8)];
       newData.longText = timeslot.longText;
       scheduleData.push(newData);
     });
