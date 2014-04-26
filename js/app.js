@@ -410,10 +410,10 @@ var test4 = {
     function refreshCalendar() {
       $('.added-class').each(function(index) {
         var courseData = $(this).data('courseData');
-        var inputs = $(this).find('input');
-        var isMandatory = inputs.slice(0,1).is(':checked');
-        var isPreferred = inputs.slice(1,2).is(':checked');
-        var isOptional  = inputs.slice(2,3).is(':checked');
+        var labels = $(this).find('label');
+        var isMandatory = labels.slice(0,1).hasClass('active');
+        var isPreferred = labels.slice(1,2).hasClass('active');
+        var isOptional  = labels.slice(2,3).hasClass('active');
         console.log(courseData);
         console.log(isMandatory);
         //console.log($(this).children('input')[1].val());
