@@ -393,7 +393,8 @@ var test4 = {
               $('<label/>', { 'class':"btn btn-default pref", 'text':"Preferred" }).append(
                 $('<input/>', { 'type':"radio", 'name':"options", 'id':"option2" })),
               $('<label/>', { 'class':"btn btn-default pref", 'text':"Optional" }).append(
-                $('<input/>', { 'type':"radio", 'name':"options", 'id':"option3" }))))));
+                $('<input/>', { 'type':"radio", 'name':"options", 'id':"option3" })))))
+        .data('courseData', $(this).data('courseData')));
 
       /*jQuery('<div/>', {
         class:".added-class.row",
@@ -401,6 +402,22 @@ var test4 = {
       }).append()
       console.log($(this).data("courseData"));*/
     }
+
+    function refreshCalendar() {
+      $('.added-class').each(function(index) {
+        var courseData = $(this).data('courseData');
+        var inputs = $(this).find('input');
+        var isMandatory = inputs.slice(0,1).is(':checked');
+        var isPreferred = inputs.slice(1,2).is(':checked');
+        var isOptional  = inputs.slice(2,3).is(':checked');
+        console.log(courseData);
+        console.log(isMandatory);
+        //console.log($(this).children('input')[1].val());
+        //console.log($(this).children('input')[2].val());
+      });
+    }
+
+    $('#submit').click(refreshCalendar);
 
   });
 }).call(this, window, window.document, window.jQuery);
