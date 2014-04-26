@@ -206,7 +206,12 @@ body{
 
 #submit>button{
     font-size:2em;
-    height:80px;
+}
+
+#submit img{
+    height:32px;
+    width:32px;
+    margin-bottom:5px;
 }
 
 a:visited, .white{
