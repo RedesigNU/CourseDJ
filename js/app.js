@@ -1,4 +1,5 @@
 (function(window, document, $, undefined){
+  var timeslots;
 
   var Timeslot;
   Timeslot = (function() {
@@ -117,6 +118,7 @@
     //console.log(filteredCourses);
     console.log(filteredCourses[20]);
     console.log(Timeslot.fromClass(filteredCourses[20]));
+    timeslots = Timeslot.fromClass(filteredCourses[20]);
   });
 
 /*    Caesar.getTermCourses('4530', function(err, termCourses) {
@@ -124,5 +126,18 @@
     console.log(termCourses);
   });*/
   
+  function displayCalendar() {
+    var scheduleData = [];
+    $.each(timeslots, function(index, timeslot) {
+      var newData = {};
+      newData.id = index + 1;
+      newData.text = timeslot.shortText;
+      newData.start_date = timeslot.startTime;
+      newData.end_date = timeslot.endTime;
+      scheduleData.push(newData);
+    })
+  }
+
+  displayCalendar();
   
 }).call(this, window, window.document, window.jQuery);
