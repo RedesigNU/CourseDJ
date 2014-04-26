@@ -52,7 +52,7 @@
 
       // Create a set of functions
       var timer;
-      var stoppedTypingInterval = 100;
+      var stopTypeInterval = 100;
 
       // On key up, start counting down
       $('#classSearchBar').keyup(function(e) {
