@@ -4,7 +4,7 @@
         return this.indexOf(str) == 0;
       };
     }
-  
+
   var timeslots;
 
   var Timeslot;
@@ -125,6 +125,7 @@
     console.log(filteredCourses[20]);
     console.log(Timeslot.fromClass(filteredCourses[20]));
     timeslots = Timeslot.fromClass(filteredCourses[20]);
+    displayCalendar();
   });
 
 /*    Caesar.getTermCourses('4530', function(err, termCourses) {
@@ -142,9 +143,8 @@
       newData.end_date = timeslot.endTime;
       scheduleData.push(newData);
     })
+    scheduler.parse(scheduleData, "json");
   }
-
-  displayCalendar();
   
   /*
    * SEARCH FUNCTION
