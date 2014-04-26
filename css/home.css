@@ -10,7 +10,7 @@ body{
     background-image:url("../img/sunset1.jpg");
 }
 
-.title{
+#title{
     font-size:50px;   
 }
 
@@ -39,7 +39,7 @@ body{
 }
 
 #welcome img{
-    padding-bottom:6.5em;
+    padding-bottom:5em;
 }
 
 #subheading{
@@ -54,18 +54,12 @@ body{
 #header{
     text-align:left;
     padding-left:20px;
-    padding-top:10px;
-    margin-bottom:-20px;
-}
-
-#header>img{
-    margin-bottom:25px;
 }
 
 #everything{
     height:86%;
     margin:0px 10px 0px 10px;
-    padding:0px 10px 10px 10px;
+    padding:10px;
 }
 
 #aboutpara{
@@ -88,10 +82,6 @@ body{
     padding-bottom:5px;
     height:40px;
     width:auto;
-}
-
-#abt{
-    margin-top:0.5em;
 }
 
 #aboutleft{
@@ -187,7 +177,6 @@ body{
     font-family:"Droid Sans";
     padding-left:0px;
     padding-right:0px;
-    margin-top:0px;
 }
 
 #attributes{
@@ -201,18 +190,6 @@ body{
 #submit{
     margin-top:30px;
     text-align:center;
-    padding:0px;
-}
-
-#submit>button{
-    font-size:2em;
-    border:2px solid black;
-}
-
-#submit img{
-    height:32px;
-    width:32px;
-    margin-bottom:5px;
 }
 
 a:visited, .white{

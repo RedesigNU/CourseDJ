@@ -167,9 +167,9 @@ var test4 = {
 
     function conflict(ts1, ts2) {
       return (ts1.startTime <= ts2.endTime && ts1.startTime >= ts2.startTime ||
-          ts2.startTime <= ts1.endTime && ts2.startTime >= ts1.startTime ||
-          ts1.startTime <= ts2.startTime && ts1.endTime >= ts2.endTime ||
-          ts2.startTime <= ts1.startTime && ts2.endTime >= ts1.endTime);
+        ts2.startTime <= ts1.endTime && ts2.startTime >= ts1.startTime ||
+        ts1.startTime <= ts2.startTime && ts1.endTime >= ts2.endTime ||
+        ts2.startTime <= ts1.startTime && ts2.endTime >= ts1.endTime);
     }
 
     //add all mandatory timeslots
@@ -213,22 +213,30 @@ var test4 = {
 
     console.log('alltimeslots: ' + allTimeslots.length);
 
+    console.log(allTimeslots);
+
     var ii = 0;
     while(numClasses < numberOfClasses && ii < allTimeslots.length) {
-      console.log(ii);
       var testCases = allTimeslots[ii];
       var anyConflict = false;
+      console.log('timeslots length: ' + timeslots.length);
+      console.log('testcases length' + testCases.length);
       for (var jj = 0; jj < timeslots.length; jj++) {
-        if (conflict(timeslots[jj], testCases[ii])) {
-          anyConflict = true;
+        for (var kk = 0; kk < testCases.length; kk++) {
+           if (conflict(timeslots[jj], testCases[kk])) {
+            anyConflict = true;
+          } 
         }
       }
 
       if (!anyConflict) {
+        // console.log('timeslots');
+        // console.log(timeslots);
+        // console.log('testcases');
+        // console.log(testCases);
         timeslots = timeslots.concat(testCases);
         numClasses++;
       }
-
       ii++;
     }
 
@@ -297,49 +305,6 @@ var test4 = {
    */
   $(document).ready(function() {
 
-    $('#customEventOK').click(function(e) {
-      var courseData = {
-        type: 'custom',
-        meeting_days: '',
-        start_time: $('#startHour').val() + ':' + $('#startMinute').val() + ':00',
-        end_time: $('#endHour').val() + ':' + $('#endMinute').val() + ':00',
-        shortText: $('#name').val()
-      };
-
-      if ($('#mon').is(':checked'))
-        courseData.meeting_days += 'Mo';
-      if ($('#tue').is(':checked'))
-        courseData.meeting_days += 'Tu';
-      if ($('#wed').is(':checked'))
-        courseData.meeting_days += 'We';
-      if ($('#thu').is(':checked'))
-        courseData.meeting_days += 'Th';
-      if ($('#fri').is(':checked'))
-        courseData.meeting_days += 'Fr';
-      if ($('#sat').is(':checked'))
-        courseData.meeting_days += 'Sa';
-      if ($('#sun').is(':checked'))
-        courseData.meeting_days += 'Su';
-
-      $('#added-classes').append(
-        $('<div/>', { 'class':"added-class row panel panel-default" }).append(
-          $('<a/>', { 'data-toggle':"collapse"}).append(  // Trigger for holding labs array info
-            $('<div/>', { 'class':"col-lg-1 col-md-1 col-sm-1 col-xs-1" }).append(
-              $('<span/>', { 'class':"glyphicon glyphicon-remove" })).click(removeCourse),
-            $('<div/>', { 'class':"col-lg-8 col-md-8 col-sm-8 col-xs-8",
-                          'text' : $('#name').val() }),
-            $('<div/>', { 'class':"col-lg-12 col-md-12 col-sm-12 col-xs-12" }).append(
-              $('<div/>', { 'class':"btn-group prefs", 'data-toggle':"buttons" }).append(
-                $('<label/>', { 'class':"btn btn-default pref active", 'text':"Mandatory" }).append(
-                  $('<input/>', { 'type':"radio", 'name':"options", 'id':"option1", 'checked':"checked"})),
-                $('<label/>', { 'class':"btn btn-default pref", 'text':"Preferred" }).append(
-                  $('<input/>', { 'type':"radio", 'name':"options", 'id':"option2" })),
-                $('<label/>', { 'class':"btn btn-default pref", 'text':"Optional" }).append(
-                  $('<input/>', { 'type':"radio", 'name':"options", 'id':"option3" }))))),
-            $('<div/>', { 'class':"panel-collapse collapse out col-xs-12 col-lg-12 col-md-12 col-sm-12" })
-        ).data('courseData', courseData));
-    });
-
     $('#add-event').click(function(e) {
       $('#customEventModal').modal();
     });
@@ -401,7 +366,7 @@ var test4 = {
             
             // Add it to the website!
             $('#results').empty();
-            $('#results').append('<li class="listButton" id="add-event" onClick="$(\'#customEventModal\').modal();">Add a custom event</li>');
+            $('#results').append('<li class="listButton" id="add-event">Add a custom event</li>');
             $.each(searchResults, function(index, element) {
               generateList(index, element);
             });
@@ -529,38 +494,14 @@ var test4 = {
         var isPreferred = labels.slice(1,2).hasClass('active');
         var isOptional  = labels.slice(2,3).hasClass('active');
 
-
-
-      // this.startTime = params["startTime"];
-      // this.endTime = params["endTime"];
-      // this.shortText = params["shortText"];
-      // this.longText = params["longText"];
-      // this.priority = params["priority"];
-      // this.conflicted = params["conflicted"];
-      // this.color = params["color"];
-
         var pri;
         if (isMandatory) pri = 1.0;
         if (isPreferred) pri = 0.5;
         if (isOptional) pri = 0.0;
-        if (courseData.type == 'custom')
-        {
-          var newTimeslotArray = [];
-          newTimeslotArray.push(new Timeslot({
-            startTime: courseData.start_time,
-            endTime: courseData.end_time,
-            shortText: courseData.shortText,
-            longText: courseData.shortText,
-            conflicted: false,
-            color: pastel[Math.floor(Math.random()*8)]
-            }));
-          allTimeslots.push(newTimeslotArray);
-        } else {
         allTimeslots.push(Timeslot.fromClass(courseData, pri == 1.0 ? 1.0 : (pri + Math.random() * 0.2 ).clamp(0, 0.98),
           'Professor: ' + courseData.instructor.name + '<br>' +
           'Meeting time: ' + courseData.start_time + '-' + courseData.end_time + '<br>' +
           'Classroom: ' + courseData.room, pastel[Math.floor(Math.random()*8)]));
-        }
       });
       numberOfClasses = $('select').val();
       console.log(allTimeslots.length);
