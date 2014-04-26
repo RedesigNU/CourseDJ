@@ -282,6 +282,10 @@ var test4 = {
    */
   $(document).ready(function() {
 
+    $('.dhx_scale_bar').each(function(index, elem) {
+      $(this).text($(this).text().substr(0,3));
+    });
+
     // When the timer counts down to 0 from 100ms, start the search
     var timer;
     var stoppedTypingInterval = 100;
