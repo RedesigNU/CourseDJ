@@ -2,6 +2,7 @@ $(document).ready(function(){
     scheduler.config.first_hour = 8;
     scheduler.config.last_hour = 26;
     scheduler.config.start_on_monday = false;
+    scheduler.config.dblclick_create = false;
     scheduler.init('scheduler_here', new Date(), "week"); //Set for 1st week of qtr here
     
     var sample = [
@@ -14,10 +15,21 @@ $(document).ready(function(){
         return false;
     });
 
-    scheduler.attachEvent("onClick", function(id, mode, e){
-        console.log("hi");
+    scheduler.attachEvent("onClick", function(id, e){
+        console.log(id);
+        return false;
+
+    });
+    scheduler.config.drag_create = false;
+    scheduler.attachEvent("onBeforeEventCreated", function(id, mode, e){
+        console.log("hi2");
         return false;
     });
+
+    scheduler.attachEvent("onBeforeEventDisplay", function(id,view){
+    console.log("Hi3");
+    return false;
+});
 
     scheduler.parse(sample, "json");//takes the name and format of the data source
 });
