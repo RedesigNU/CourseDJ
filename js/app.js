@@ -294,6 +294,10 @@ var test4 = {
    */
   $(document).ready(function() {
 
+    $('#search').click(function(e){
+      $(this).parent().attr('class', 'dropdown');
+    });
+
     // When the timer counts down to 0 from 100ms, start the search
     var timer;
     var stoppedTypingInterval = 100;
@@ -384,21 +388,15 @@ var test4 = {
       $(this).parent().parent().remove();
     }
 
-    // Add course dropdown list on the left sidebar
+    // Add the course menu on the left sidebar
     function addCourse(e) {
-
-      var labs = $(this).data("courseData").coursecomponent_set;
-      if (labs.length > 0) {
-        console.log(labs);
-      }
-
       $('#added-classes').append(
         $('<div/>', { 'class':"added-class row panel panel-default" }).append(
-          $('<a/>', { 'data-toggle':"collapse", 'href':"#collapse"+$(this).data("courseData").catalog_num}).append(  
+          $('<a/>', { 'data-toggle':"collapse", 'href':"#collapse"+$(this).data("courseData").catalog_num}).append(  // Trigger for holding labs array info
             $('<div/>', { 'class':"col-lg-1 col-md-1 col-sm-1 col-xs-1" }).append(
               $('<span/>', { 'class':"glyphicon glyphicon-remove" })).click(removeCourse),
             $('<div/>', { 'class':"col-lg-8 col-md-8 col-sm-8 col-xs-8",
-                        'text' :$(this).data("courseData").subject + " " +  $(this).data("courseData").catalog_num + "-" + $(this).data("courseData").section }),
+                          'text' :$(this).data("courseData").subject + " " +  $(this).data("courseData").catalog_num + "-" + $(this).data("courseData").section }),
             $('<div/>', { 'class':"col-lg-12 col-md-12 col-sm-12 col-xs-12" }).append(
               $('<div/>', { 'class':"btn-group prefs", 'data-toggle':"buttons" }).append(
                 $('<label/>', { 'class':"btn btn-default pref", 'text':"Mandatory" }).append(
@@ -407,10 +405,35 @@ var test4 = {
                   $('<input/>', { 'type':"radio", 'name':"options", 'id':"option2" })),
                 $('<label/>', { 'class':"btn btn-default pref", 'text':"Optional" }).append(
                   $('<input/>', { 'type':"radio", 'name':"options", 'id':"option3" }))))),
-            $('<div/>', { 'class':"panel-collapse collapse out col-xs-12 col-lg-12 col-md-12 col-sm-12", 'id':"collapse"+$(this).data("courseData").catalog_num, 'text':labs})
+            $('<div/>', { 'class':"panel-collapse collapse out col-xs-12 col-lg-12 col-md-12 col-sm-12", 'id':"collapse" + $(this).data("courseData").catalog_num })
         ).data('courseData', $(this).data('courseData')));
       
+      // 'Parent' returns the course of the lab array
+      var parent = $(this).data("courseData");
+      var parentID = "#collapse" + parent.catalog_num;
 
+      // 'labs' returns an array of Lab/Discussion objects
+      var labs = $(this).data("courseData").coursecomponent_set;
+      
+      console.log(labs);
+
+      $.each(labs.reverse(), function(idIn, elementIn) {
+
+
+        // Keep track of the outside ID again
+        var otherID = $(this);
+
+        $('<div/>', {
+          id: idIn,
+          class: "labButton",
+          text: $(this)[0].component + " Section " + $(this)[0].section
+        }).click(returnData).data("parentData", parent).data("labData", labs[idIn]).appendTo(parentID);
+      });
+    }
+
+    function returnData(e) {
+      console.log($(this).data("parentData"));
+      console.log($(this).data("labData"));
     }
 
     function refreshCalendar() {

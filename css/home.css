@@ -204,3 +204,7 @@ a:visited{
     cursor: pointer;
     cursor: hand;
 }
+
+.labButton:hover {
+    background-color: darkgray;
+}
