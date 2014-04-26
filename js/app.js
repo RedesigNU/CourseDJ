@@ -115,11 +115,12 @@
     return Caesar;
   }());
 
+  /*
   Caesar.getCourses('4530', 'MATH', function(err, courses) {
     var filteredCourses = courses;
-/*      filteredCourses = $.grep(courses, function(course) {
+        filteredCourses = $.grep(courses, function(course) {
       return course.seats > 50;
-    });*/
+    });
     //console.log("filtered courses:");
     //console.log(filteredCourses);
     console.log(filteredCourses[20]);
@@ -127,6 +128,7 @@
     timeslots = Timeslot.fromClass(filteredCourses[20]);
     displayCalendar();
   });
+  */
 
 /*    Caesar.getTermCourses('4530', function(err, termCourses) {
     console.log("term courses:");
@@ -231,15 +233,32 @@
       jQuery('<li/>', {
         id: idIn,
         class: "listButton",
-        text: "[" + elementIn.subject + " " + elementIn.catalog_num + "] " + elementIn.title
+        text: "[" + elementIn.subject + " " + elementIn.catalog_num + "-" + elementIn.section + "] " + elementIn.title
       }).click(addCourse).data("courseData", elementIn).appendTo('#results');
     }
 
-    var calendar
-
-    // Add course to calendar and store it
+    // Add course dropdown list on the left sidebar
     function addCourse(e) {
-      console.log($(this).data("courseData"));
+      $('#added-classes').append(
+        $('<div/>', { "class":'added-class row' }).append(
+          $('<div/>', { "class":'col-lg-3 col-md-3 col-sm-8' }).append(
+            $('<span/>', { "class":'glyphicon glyphicon-remove' })),
+          $('<div/>', { "class":'col-md-3 col-sm-8',
+                        "text" :$(this).data("courseData").subject + " " +  $(this).data("courseData").catalog_num }),
+          $('<div/>', { "class":"col-lg-8 col-md-8" }).append(
+            $('<div/>', { "class":"btn-group prefs", "data-toggle":"buttons" }).append(
+              $('<label/>', { "class":"btn btn-default pref", "text":"Mandatory" }).append(
+                $('<input/>', { "type":"radio", "name":"options", "id":"option1" })),
+              $('<label/>', { "class":"btn btn-default pref", "text":"Preferred" }).append(
+                $('<input/>', { "type":"radio", "name":"options", "id":"option2" })),
+              $('<label/>', { "class":"btn btn-default pref", "text":"Optional" }).append(
+                $('<input/>', { "type":"radio", "name":"options", "id":"option3" }))))));
+
+      /*jQuery('<div/>', {
+        class:".added-class.row",
+        text: 
+      }).append()
+      console.log($(this).data("courseData"));*/
     }
 
   });
