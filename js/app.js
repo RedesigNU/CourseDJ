@@ -18,6 +18,8 @@ var test4 = {
   end_time: '12:00'
 };*/
 
+
+
 (function(window, document, $, undefined){
     if (typeof String.prototype.startsWith != 'function') {
       String.prototype.startsWith = function(str) {
@@ -25,15 +27,29 @@ var test4 = {
       };
     }
 
-    var groupingIndex = 1;
+    Number.prototype.clamp = function(min, max) {
+  return Math.min(Math.max(this, min), max);
+};
+
+  var pastel = [
+  '#5484ed',
+  '#51b749',
+  '#dbadff',
+  '#ff887c',
+  '#7ae7bf',
+  '#ffb878',
+  '#fbd75b',
+  '#a4bdfc'
+  ]
 
 
   var allTimeslots;
   var timeslots;
+  var numberOfClasses;
 
   var Timeslot;
   Timeslot = (function() {
-    Timeslot.fromClass = function(p_class) {
+    Timeslot.fromClass = function(p_class, pri, lt, clr) {
       var timeslots = [];
       var numTimeslots = p_class.meeting_days.length/2;
       for (var ii = 0; ii < numTimeslots; ii++) {
@@ -65,10 +81,11 @@ var test4 = {
           startTime: currentDay + ' ' + p_class.start_time.substr(0, 5),
           endTime: currentDay + ' ' + p_class.end_time.substr(0, 5),
           shortText: p_class.subject + ': ' + p_class.catalog_num,
-          longText: 'hello',
-          priority: 1.0,
-          grouping: groupingIndex
-        }
+          longText: lt,
+          priority: pri,
+          conflicted: false,
+          color: clr
+        };
         var aTimeslot = new Timeslot(params);
         timeslots.push(aTimeslot);
       }
@@ -84,7 +101,8 @@ var test4 = {
       this.shortText = params["shortText"];
       this.longText = params["longText"];
       this.priority = params["priority"];
-      this.grouping = params["grouping"];
+      this.conflicted = params["conflicted"];
+      this.color = params["color"];
     }
     return Timeslot;
   })();
@@ -144,21 +162,8 @@ var test4 = {
   }());
 
   function algorithm() {
-    //give an array of timeslots
-/*    var TimeslotGroup = (function() {
-      function TimeslotGroup('group') {
-        this.group = group;
-      }
-      return TimeslotGroup
-    })();
 
-    var timeslotGroups = [];
-    var currTimeslotGroup = new TimeslotGroup;
-    for(var ii = 0; ii < allTimeslots.length; ii++) {
-      if (currTimeslotGroup.group.length == 0 || currTimeslotGroup.group[0].grouping == allTimeslots[ii].grouping) {
-        currTimeslotGroup.push
-      }
-    }*/
+    timeslots = [];
 
     function conflict(ts1, ts2) {
       return (ts1.startTime <= ts2.endTime && ts1.startTime >= ts2.startTime ||
@@ -167,72 +172,72 @@ var test4 = {
           ts2.startTime <= ts1.startTime && ts2.endTime >= ts1.endTime);
     }
 
-
-    //helper function
-    function tsgConflict(tsg1, tsg2) {
-      for (var ii = 0; ii < tsg1.length; ii++) {
-        for (var jj = 0; jj < tsg2.length; jj++) {
-          if (conflict(tsg1[ii], tsg2[jj])) {
-            return true;
-          }
-        }
-      }
-      return false;
-    }
-
-    //create timeslot groups
-    var timeslotGroups = [];
-    var currTimeslotGroup = [];
-    for (var ii = 0; ii < allTimeslots.length; ii++) {
-      var currTimeslot = allTimeslots[ii];
-      if (currTimeslotGroup.length == 0 || currTimeslotGroup[0].grouping == currTimeslot.grouping) {
-        currTimeslotGroup.push(currTimeslot);
-      }
-      else {
-        timeslotGroups.push(currTimeslotGroup);
-        currTimeslotGroup = [];
-        currTimeslotGroup.push(currTimeslot);
-      }
-    }
-    if(currTimeslotGroup.length > 0)
-      timeslotGroups.push(currTimeslotGroup);
-    
-
-
-        console.log('length: ' + timeslotGroups.length);
-
-
-
-
-    //add all mandatory groups
+    //add all mandatory timeslots
     var mandatory = [];
-
-    for(var ii = 0; ii < timeslotGroups.length; ii++) {
-      if (timeslotGroups[ii][0] && timeslotGroups[ii][0].priority == 1.0) {
-        mandatory.push(timeslotGroups[ii]);
-      }
-    }
-    console.log(timeslotGroups);
-    console.log(mandatory);
-
-    var mandatoryConflict = false;
-    for (var ii = 0; ii < timeslotGroups.length - 1; ii++) {
-      for (var jj = 1; jj < timeslotGroups.length; jj++) {
-        if (tsgConflict(mandatory[ii], mandatory[jj])) {
-          alert(ii + ' ' + jj);
-          mandatoryConflict = true;
+    for(var ii = 0; ii < allTimeslots.length; ii++) {
+      for (var jj = 0; jj < allTimeslots[ii].length; jj++) {
+        var currTimeslot = allTimeslots[ii][jj];
+        if(currTimeslot.priority == 1.0) {
+          mandatory.push(currTimeslot);
         }
       }
+    }
+
+   //test all mandatory timeslot for conflict
+    var mandatoryConflict = false;
+    for (var ii = 0; ii < mandatory.length; ii++) {
+      for (var jj = 0; jj < mandatory.length; jj++) {
+        if(ii != jj && conflict(mandatory[ii], mandatory[jj])) {
+          mandatoryConflict = true;
+          mandatory[ii].conflicted = true;
+          mandatory[jj].conflicted = true;
+        }
+      }
+    }
+
+    for (var ii = 0; ii < mandatory.length; ii++) {
+      timeslots = timeslots.concat(mandatory[ii]);
+    }
+
+    //sort the rest by preference
+    allTimeslots.sort(function(a,b) { return b[0].priority - a[0].priority;});
+
+    var numClasses = 0;
+    for(var ii = 0; ii < allTimeslots.length; ii++) {
+      if (allTimeslots[ii][0].priority == 1.0) {
+        allTimeslots.splice(ii, 1);
+        ii--;
+        numClasses++;
+      }
+    }
+
+    console.log('alltimeslots: ' + allTimeslots.length);
+
+    var ii = 0;
+    while(numClasses < numberOfClasses && ii < allTimeslots.length) {
+      console.log(ii);
+      var testCases = allTimeslots[ii];
+      var anyConflict = false;
+      for (var jj = 0; jj < timeslots.length; jj++) {
+        if (conflict(timeslots[jj], testCases[ii])) {
+          anyConflict = true;
+        }
+      }
+
+      if (!anyConflict) {
+        timeslots = timeslots.concat(testCases);
+        numClasses++;
+      }
+
+      ii++;
+    }
+
+    if (numClasses < numberOfClasses) {
+      alert("Couldn't meet your required number of classes. Try adding more!")
     }
 
     if (mandatoryConflict) {
-      console.log("mandatory conflict!");
-      timeslots = [];
-    }
-
-
-    for (var ii = 0; ii < timeslotGroups.length; ii++) {
-      timeslots = timeslots.concat(timeslotGroups[ii]);
+      alert("Some of your mandatory classes conflict!");
     }
   }
   
@@ -245,8 +250,10 @@ var test4 = {
       newData.text = timeslot.shortText;
       newData.start_date = timeslot.startTime;
       newData.end_date = timeslot.endTime;
+      newData.color = timeslot.conflicted ? 'red' : timeslot.color;
+      newData.longText = timeslot.longText;
       scheduleData.push(newData);
-    })
+    });
     scheduler.parse(scheduleData, "json");
   }
 
@@ -255,8 +262,7 @@ var test4 = {
       this.endTime = params["endTime"];
       this.shortText = params["shortText"];
       this.longText = params["longText"];
-      this.priority = params["priority"];
-      this.grouping = params["grouping"];*/
+      this.priority = params["priority"];*/
 
 
  /* allTimeslots = 
@@ -265,24 +271,21 @@ var test4 = {
     endTime: '11:50',
     shortText: 'abc',
     longText: '',
-    priority: 1.0,
-    grouping: 1
+    priority: 1.0
   }),
   new Timeslot({
     startTime: '11:55',
     endTime: '12:00',
     shortText: 'def',
     longText: '',
-    priority: 1.0,
-    grouping: 2
+    priority: 1.0
   }),
   new Timeslot({
     startTime: '11:30',
     endTime: '12:00',
     shortText: 'def',
     longText: '',
-    priority: 1.0,
-    grouping: 2
+    priority: 1.0
   })];
 
 
@@ -296,6 +299,10 @@ var test4 = {
 
     $('#search').click(function(e){
       $(this).parent().attr('class', 'dropdown');
+    }
+
+    $('.dhx_scale_bar').each(function(index, elem) {
+      $(this).text($(this).text().substr(0,3));
     });
 
     // When the timer counts down to 0 from 100ms, start the search
@@ -377,6 +384,16 @@ var test4 = {
 
     // Populate drop down menu w/ search results
     function generateList(idIn, elementIn) {
+      var skip = false;
+      $('.added-class').each(function(index) {
+        var courseData = $(this).data('courseData');
+        if (courseData.subject == elementIn.subject && courseData.catalog_num == elementIn.catalog_num && courseData.section == elementIn.section) {
+          skip = true;
+          return;
+        }
+      });
+      if (skip)
+        return;
       $('<li/>', {
         id: idIn,
         class: "listButton",
@@ -390,6 +407,27 @@ var test4 = {
 
     // Add the course menu on the left sidebar
     function addCourse(e) {
+<<<<<<< HEAD
+=======
+
+      var courseData = $(this).data("courseData");
+      var labs = courseData.coursecomponent_set;
+      if (labs.length > 0) {
+        console.log(labs);
+      }
+
+      var skip = false;
+      $('.added-class').each(function(index) {
+        var courseData2 = $(this).data('courseData');
+        if (courseData.subject == courseData2.subject && courseData.catalog_num == courseData2.catalog_num && courseData.section == courseData2.section) {
+          skip = true;
+          return;
+        }
+      });
+      if (skip)
+        return;
+
+>>>>>>> 71039aa2b092ceac91dfd09d749a5f3bcce1167f
       $('#added-classes').append(
         $('<div/>', { 'class':"added-class row panel panel-default" }).append(
           $('<a/>', { 'data-toggle':"collapse", 'href':"#collapse"+$(this).data("courseData").catalog_num}).append(  // Trigger for holding labs array info
@@ -399,8 +437,8 @@ var test4 = {
                           'text' :$(this).data("courseData").subject + " " +  $(this).data("courseData").catalog_num + "-" + $(this).data("courseData").section }),
             $('<div/>', { 'class':"col-lg-12 col-md-12 col-sm-12 col-xs-12" }).append(
               $('<div/>', { 'class':"btn-group prefs", 'data-toggle':"buttons" }).append(
-                $('<label/>', { 'class':"btn btn-default pref", 'text':"Mandatory" }).append(
-                  $('<input/>', { 'type':"radio", 'name':"options", 'id':"option1" })),
+                $('<label/>', { 'class':"btn btn-default pref active", 'text':"Mandatory" }).append(
+                  $('<input/>', { 'type':"radio", 'name':"options", 'id':"option1", 'checked':"checked"})),
                 $('<label/>', { 'class':"btn btn-default pref", 'text':"Preferred" }).append(
                   $('<input/>', { 'type':"radio", 'name':"options", 'id':"option2" })),
                 $('<label/>', { 'class':"btn btn-default pref", 'text':"Optional" }).append(
@@ -438,7 +476,6 @@ var test4 = {
 
     function refreshCalendar() {
       allTimeslots = [];
-      timeslots = [];
       $('.added-class').each(function(index) {
         var courseData = $(this).data('courseData');
         var labels = $(this).find('label');
@@ -449,9 +486,17 @@ var test4 = {
         // console.log(isMandatory);
         //console.log($(this).children('input')[1].val());
         //console.log($(this).children('input')[2].val());
-        allTimeslots = allTimeslots.concat(Timeslot.fromClass(courseData));
-        //groupingIndex++;
+        var pri;
+        if (isMandatory) pri = 1.0;
+        if (isPreferred) pri = 0.5;
+        if (isOptional) pri = 0.0;
+        allTimeslots.push(Timeslot.fromClass(courseData, pri == 1.0 ? 1.0 : (pri + Math.random() * 0.2 ).clamp(0, 0.98),
+          'Professor: ' + courseData.instructor.name + '<br>' +
+          'Meeting time: ' + courseData.start_time + '-' + courseData.end_time + '<br>' +
+          'Classroom: ' + courseData.room, pastel[Math.floor(Math.random()*8)]));
       });
+      numberOfClasses = $('select').val();
+      console.log(allTimeslots.length);
       algorithm();
       displayCalendar();
     }
