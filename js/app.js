@@ -18,12 +18,18 @@ var test4 = {
   end_time: '12:00'
 };*/
 
+
+
 (function(window, document, $, undefined){
     if (typeof String.prototype.startsWith != 'function') {
       String.prototype.startsWith = function(str) {
         return this.indexOf(str) == 0;
       };
     }
+
+    Number.prototype.clamp = function(min, max) {
+  return Math.min(Math.max(this, min), max);
+};
 
 
   var allTimeslots;
@@ -32,7 +38,7 @@ var test4 = {
 
   var Timeslot;
   Timeslot = (function() {
-    Timeslot.fromClass = function(p_class, pri) {
+    Timeslot.fromClass = function(p_class, pri, lt) {
       var timeslots = [];
       var numTimeslots = p_class.meeting_days.length/2;
       for (var ii = 0; ii < numTimeslots; ii++) {
@@ -404,8 +410,8 @@ var test4 = {
                         'text' :$(this).data("courseData").subject + " " +  $(this).data("courseData").catalog_num + "-" + $(this).data("courseData").section }),
             $('<div/>', { 'class':"col-lg-12 col-md-12 col-sm-12 col-xs-12" }).append(
               $('<div/>', { 'class':"btn-group prefs", 'data-toggle':"buttons" }).append(
-                $('<label/>', { 'class':"btn btn-default pref", 'text':"Mandatory" }).append(
-                  $('<input/>', { 'type':"radio", 'name':"options", 'id':"option1" })),
+                $('<label/>', { 'class':"btn btn-default pref active", 'text':"Mandatory" }).append(
+                  $('<input/>', { 'type':"radio", 'name':"options", 'id':"option1", 'checked':"checked"})),
                 $('<label/>', { 'class':"btn btn-default pref", 'text':"Preferred" }).append(
                   $('<input/>', { 'type':"radio", 'name':"options", 'id':"option2" })),
                 $('<label/>', { 'class':"btn btn-default pref", 'text':"Optional" }).append(
@@ -432,7 +438,10 @@ var test4 = {
         if (isMandatory) pri = 1.0;
         if (isPreferred) pri = 0.5;
         if (isOptional) pri = 0.0;
-        allTimeslots.push(Timeslot.fromClass(courseData, pri));
+        allTimeslots.push(Timeslot.fromClass(courseData, pri == 1.0 ? 1.0 : (pri + Math.random() * 0.2 ).clamp(0, 0.98)),
+          'Professor: ' + courseData.instructor.name + '\n' +
+          'Meeting time: ' + courseData.startTime + '-' + courseData.endTime + '\n' +
+          'Classroom: ' + courseData.room);
       });
       numberOfClasses = $('select').val();
       console.log(allTimeslots.length);
